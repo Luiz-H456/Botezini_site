@@ -482,18 +482,44 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .pillar[data-pos="1"] { transform:translateX(180px) rotateY(-15deg) scale(0.8); }
   .pillar[data-pos="-1"] { transform:translateX(-180px) rotateY(15deg) scale(0.8); }
   .pillar[data-pos="2"], .pillar[data-pos="-2"] { opacity:0; pointer-events:none; }
-  .tradicao-grid { grid-template-columns:1fr; gap:50px; }
-  .processo-grid { grid-template-columns:1fr 1fr; gap:40px; }
+  .tradicao-grid { grid-template-columns:1fr; gap:30px; }
+  .tradicao-img-wrap { position:absolute; inset:0; opacity:0.12; z-index:0; padding-bottom:0; pointer-events:none; }
+  .tradicao-img-frame { border-radius:0; border:none; height:100%; width:100%; }
+  .tradicao-img-frame img { filter:grayscale(80%); }
+  .section.paper { position:relative; overflow:hidden; }
+  .section.paper .container { position:relative; z-index:1; }
+  .tradicao-bullets { margin-top:20px; text-shadow: 0 0 10px rgba(247, 242, 232, 0.8); }
+  .processo-grid { grid-template-columns:1fr 1fr; gap:30px; }
+  .processo-num { font-size:54px; top:-5px; }
+  .processo-title { font-size:18px; }
+  .processo-desc { font-size:14px; }
   .products-grid { padding:20px 0; gap:30px; }
   .product-card { padding:20px 16px; }
   .sec-title { margin-bottom:12px; }
+
+  /* Segunda Galeria (Var-Card) Mobile */
+  .var-carousel-scene { height:380px; }
+  .var-card { width:90vw; padding:24px 20px; gap:20px; }
+  .var-card-num { font-size:38px; }
+  .var-card-title { font-size:18px; }
+  .var-card-grid { gap:10px; }
+  .var-card-item { padding:10px; gap:10px; }
+  .var-card-icon { width:34px; height:34px; }
+  .var-card-icon svg { width:20px; height:20px; }
+  .var-card-name { font-size:10px; }
+  .var-card[data-pos="1"] { transform:translateX(calc(-50% + 80%)) rotateY(-18deg) scale(0.8); opacity:0.3; }
+  .var-card[data-pos="-1"] { transform:translateX(calc(-50% - 80%)) rotateY(18deg) scale(0.8); opacity:0.3; }
+  .var-arrow { width:40px; height:40px; font-size:18px; }
+  .var-arrow--left { left:10px; transform:translateY(-50%); }
+  .var-arrow--right { right:10px; transform:translateY(-50%); }
 }
 @media (max-width:600px) {
   .section { padding:60px 24px; }
   .lines-grid { grid-template-columns:1fr; }
   .stats-grid { grid-template-columns:1fr 1fr; }
   .footer { padding:24px 20px; flex-direction:column; text-align:center; }
-  .processo-grid { grid-template-columns:1fr; }
+  .processo-grid { grid-template-columns:1fr 1fr; gap:20px; }
+  .tradicao-badge { display:none; }
   .pillars-arrow { display:none; }
   .pillar { width:200px; margin-left:-100px; padding:24px 16px; }
   .pillar[data-pos="1"] { transform:translateX(110px) rotateY(-10deg) scale(0.8); }
