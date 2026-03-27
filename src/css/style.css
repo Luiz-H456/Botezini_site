@@ -72,7 +72,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .hero-glow { position:absolute; width:700px; height:700px; border-radius:50%; background:radial-gradient(ellipse, rgba(201,168,76,.08) 0%, transparent 70%); top:40%; left:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:1; }
 .hero-content { position:relative; z-index:2; max-width:900px; }
 .hero-eyebrow { font-size:9px; letter-spacing:6px; text-transform:uppercase; color:var(--gold); margin-bottom:36px; display:block; }
-.hero-bz { font-family:var(--f-display); font-size:clamp(100px,20vw,200px); font-weight:900; line-height:.9; letter-spacing:-4px; background:linear-gradient(150deg, var(--gold-dd) 0%, var(--gold-d) 18%, var(--gold-l) 42%, var(--gold-ll) 54%, var(--gold) 66%, var(--gold-d) 82%, var(--gold-dd) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:16px; animation:shimmer 8s ease-in-out infinite alternate; background-size:200% auto; }
+.hero-bz { font-family:var(--f-display); font-size:clamp(64px,22vw,200px); font-weight:900; line-height:.9; letter-spacing:-4px; background:linear-gradient(150deg, var(--gold-dd) 0%, var(--gold-d) 18%, var(--gold-l) 42%, var(--gold-ll) 54%, var(--gold) 66%, var(--gold-d) 82%, var(--gold-dd) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:16px; animation:shimmer 8s ease-in-out infinite alternate; background-size:200% auto; }
 @keyframes shimmer { 0%{background-position:0% center} 100%{background-position:100% center} }
 .hero h1 { font-family:var(--f-display); font-size:clamp(24px,4.5vw,52px); font-weight:400; font-style:italic; line-height:1.2; color:var(--white); margin-bottom:20px; }
 .hero-sub { font-family:var(--f-body); font-size:clamp(15px,2vw,18px); color:var(--gray1); letter-spacing:.5px; font-weight:300; margin-bottom:44px; line-height:1.7; max-width:640px; margin-left:auto; margin-right:auto; }
@@ -455,43 +455,57 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 
 /* ── RESPONSIVE ──────────────────────────────── */
 @media (max-width:900px) {
-  .section { padding:60px 20px; }
+  .section { padding:60px 40px; }
   .two-col, .three-col { grid-template-columns:1fr; gap:40px; }
   .lines-grid { grid-template-columns:1fr 1fr; }
   .line-card-content { padding:28px 20px; }
   .line-card h4 { font-size:22px; }
   .contact-grid { grid-template-columns:1fr; gap:40px; }
   nav { padding:0 20px; }
-  .nav-links { position:absolute; top:100%; left:0; right:0; background:rgba(8,8,8,.98); flex-direction:column; gap:0; max-height:0; overflow:hidden; transition:max-height .3s; border-bottom:1px solid transparent; }
+  .nav-links { position:absolute; top:100%; left:0; right:0; background:rgba(8,8,8,.99); flex-direction:column; gap:0; max-height:0; overflow:hidden; transition:max-height .35s ease; border-bottom:1px solid transparent; }
   .nav-links.open { max-height:600px; border-bottom-color:rgba(201,168,76,.25); }
-  .nav-links a { width:100%; text-align:center; padding:14px; font-size:11px; border-bottom:1px solid rgba(255,255,255,.04); }
+  .nav-links a { width:100%; text-align:center; padding:18px 14px; font-size:11px; border-bottom:1px solid rgba(255,255,255,.04); }
   .nav-cta { display:none; }
   .menu-btn { display:flex; margin-left:auto; }
   .menu-btn.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .menu-btn.open span:nth-child(2) { opacity:0; }
   .menu-btn.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
   .plan-card.featured { transform:none; }
-  .hero { padding:80px 20px; }
+  .hero { padding:100px 30px; }
+  .hero-bz { font-size:clamp(80px, 20vw, 150px); }
+  .hero h1 { font-size:clamp(24px, 6vw, 42px); }
   .hero-ctas { flex-direction:column; align-items:center; }
-  .btn-primary, .btn-secondary { width:100%; text-align:center; }
+  .btn-primary, .btn-secondary { width:100%; text-align:center; padding:14px 20px; }
   .calc-table-wrapper { padding:20px 15px; }
-  .var-tabs { overflow-x:auto; flex-wrap:nowrap; }
+  .var-tabs { overflow-x:auto; flex-wrap:nowrap; -webkit-overflow-scrolling:touch; }
   .var-panel.active { grid-template-columns:repeat(2, 1fr); }
-  .pillars-scene { min-height:300px; }
-  .pillar { width:260px; margin-left:-130px; }
-  .pillar[data-pos="1"] { transform:translateX(275px) rotateY(-20deg) scale(0.78); }
-  .pillar[data-pos="-1"] { transform:translateX(-275px) rotateY(20deg) scale(0.78); }
-  .pillar[data-pos="2"] { transform:translateX(470px) rotateY(-35deg) scale(0.6); }
-  .pillar[data-pos="-2"] { transform:translateX(-470px) rotateY(35deg) scale(0.6); }
+  .pillars-scene { height:320px; }
+  .pillar { width:240px; margin-left:-120px; padding:30px 20px; }
+  .pillar[data-pos="1"] { transform:translateX(180px) rotateY(-15deg) scale(0.8); }
+  .pillar[data-pos="-1"] { transform:translateX(-180px) rotateY(15deg) scale(0.8); }
+  .pillar[data-pos="2"] { transform:translateX(320px) rotateY(-25deg) scale(0.65); }
+  .pillar[data-pos="-2"] { transform:translateX(-320px) rotateY(25deg) scale(0.65); }
   .tradicao-grid { grid-template-columns:1fr; gap:50px; }
   .processo-grid { grid-template-columns:1fr 1fr; gap:40px; }
+  .products-grid { padding:20px 0; gap:30px; }
+  .product-card { padding:20px 16px; }
+  .sec-title { margin-bottom:12px; }
 }
 @media (max-width:600px) {
+  .section { padding:60px 24px; }
   .lines-grid { grid-template-columns:1fr; }
   .stats-grid { grid-template-columns:1fr 1fr; }
-  .footer { padding:16px 20px; flex-direction:column; text-align:center; }
+  .footer { padding:24px 20px; flex-direction:column; text-align:center; }
   .processo-grid { grid-template-columns:1fr; }
   .pillars-arrow { display:none; }
+  .pillar { width:200px; margin-left:-100px; padding:24px 16px; }
+  .pillar[data-pos="1"] { transform:translateX(110px) rotateY(-10deg) scale(0.8); }
+  .pillar[data-pos="-1"] { transform:translateX(-110px) rotateY(10deg) scale(0.8); }
+  .pillar h4 { font-size:18px; }
+  .pillar p { font-size:14px; }
+  .hero-bz { font-size:clamp(60px, 20vw, 100px); letter-spacing:-2px; }
+  .hero h1 { font-size:22px; }
+  .hero-sub { font-size:14px; }
 }
 
 /* ── TRADIÇÃO SECTION ────────────────────────── */
