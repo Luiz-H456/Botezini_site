@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function update() {
       items.forEach((p, i) => {
         const pos = getPos(i);
-        if (Math.abs(pos) > 2) {
+        if (Math.abs(pos) > 1) {
           p.setAttribute('data-pos', 'other');
         } else {
           p.setAttribute('data-pos', String(pos));
