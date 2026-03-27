@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Cormorant Garamond", serif;
+  --font-ui: "Montserrat", sans-serif;
+
+  --color-ink: #080808;
+  --color-ink2: #111;
+  --color-ink3: #1a1a1a;
+  --color-paper: #F7F2E8;
+  --color-paper2: #EDE7D8;
+  --color-gold: #C9A84C;
+  --color-gold-l: #E2C87A;
+  --color-gold-ll: #EDD89A;
+  --color-gold-d: #9A7B2E;
+  --color-gold-dd: #6B5520;
+  --color-white: #FAFAF8;
+  --color-gray1: #999;
+  --color-gray2: #666;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink text-paper font-ui font-light leading-relaxed;
+  }
+  ::selection {
+    background: rgba(201, 168, 76, 0.35);
+    @apply text-white;
+  }
+}
+
+@layer components {
+  .page-section {
+    @apply py-20 px-8 md:py-32 md:px-20 relative;
+  }
+  .sec-label {
+    @apply text-[10px] tracking-[5px] uppercase text-gold block mb-4;
+  }
+  .sec-title {
+    @apply font-display text-4xl md:text-6xl font-normal leading-tight mb-5;
+  }
+  .sec-rule {
+    @apply w-15 h-px bg-gold mb-10;
+  }
+}

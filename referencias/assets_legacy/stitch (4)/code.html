@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Montserrat:wght@300;400;700&amp;family=Newsreader:ital,wght@0,400;0,700;1,400&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Work+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#c5a864",
+              "on-secondary": "#32302b",
+              "secondary-fixed": "#e7e2da",
+              "background": "#131313",
+              "on-tertiary-fixed": "#251a00",
+              "on-primary": "#3d2e00",
+              "on-primary-container": "#503d00",
+              "primary-container": "#c9a84c",
+              "surface-bright": "#3a3939",
+              "secondary-fixed-dim": "#cac6be",
+              "on-tertiary-container": "#513d01",
+              "surface-container": "#201f1f",
+              "on-secondary-fixed": "#1d1c17",
+              "inverse-primary": "#755b00",
+              "inverse-surface": "#e5e2e1",
+              "inverse-on-surface": "#313030",
+              "surface": "#131313",
+              "error": "#ffb4ab",
+              "primary-fixed-dim": "#e6c364",
+              "on-surface-variant": "#d0c5b2",
+              "on-secondary-container": "#b9b5ad",
+              "on-primary-fixed-variant": "#584400",
+              "tertiary": "#e2c37d",
+              "surface-container-lowest": "#0e0e0e",
+              "on-surface": "#e5e2e1",
+              "outline": "#99907e",
+              "surface-dim": "#131313",
+              "tertiary-fixed": "#ffdf97",
+              "primary-fixed": "#ffe08f",
+              "on-secondary-fixed-variant": "#494741",
+              "surface-variant": "#353534",
+              "surface-tint": "#e6c364",
+              "surface-container-high": "#2a2a2a",
+              "surface-container-low": "#1c1b1b",
+              "on-error": "#690005",
+              "secondary-container": "#494741",
+              "secondary": "#cac6be",
+              "error-container": "#93000a",
+              "on-error-container": "#ffdad6",
+              "on-tertiary": "#3e2e00",
+              "on-tertiary-fixed-variant": "#594408",
+              "on-primary-fixed": "#241a00",
+              "primary": "#e6c364",
+              "surface-container-highest": "#353534",
+              "tertiary-fixed-dim": "#e2c37d",
+              "on-background": "#e5e2e1",
+              "outline-variant": "#4d4637"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "display": ["Playfair Display", "serif"],
+              "body": ["Work Sans", "sans-serif"],
+              "label": ["Montserrat", "sans-serif"],
+              "serif-body": ["Cormorant Garamond", "serif"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+        }
+    </style>
+</head>
+<body class="font-body">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-neutral-950/60 backdrop-blur-xl border-b border-[#C9A84C]/15">
+<div class="flex justify-between items-center px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="font-['Playfair_Display'] text-2xl font-bold text-[#C9A84C]">BZ</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-['Newsreader'] uppercase tracking-[0.1em] text-[12px] text-[#C9A84C] border-b border-[#C9A84C] pb-1" href="#">Sobre</a>
+<a class="font-['Newsreader'] uppercase tracking-[0.1em] text-[12px] text-neutral-400 hover:text-[#C9A84C] transition-colors" href="#">Linhas</a>
+<a class="font-['Newsreader'] uppercase tracking-[0.1em] text-[12px] text-neutral-400 hover:text-[#C9A84C] transition-colors" href="#">Kits</a>
+<a class="font-['Newsreader'] uppercase tracking-[0.1em] text-[12px] text-neutral-400 hover:text-[#C9A84C] transition-colors" href="#">Tecidos</a>
+<a class="font-['Newsreader'] uppercase tracking-[0.1em] text-[12px] text-neutral-400 hover:text-[#C9A84C] transition-colors" href="#">Planos</a>
+<a class="font-['Newsreader'] uppercase tracking-[0.1em] text-[12px] text-neutral-400 hover:text-[#C9A84C] transition-colors" href="#">Contato</a>
+</div>
+<button class="bg-primary-container text-on-primary px-8 py-2 font-label text-[10px] uppercase tracking-widest hover:bg-primary-fixed-dim transition-all active:scale-95">
+                Consultoria
+            </button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-surface-container-lowest">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="Close-up of premium fabric textures in dark moody lighting with architectural shadows and a gold-toned highlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpgTz8XLgvAjQMgFdCbq-xnLEokj9uXXswTcSI_wauvwzY97MN8L812_KFYtYs-V5OeIkSC2Siw9VgViEIK5HdAcl8D1wV3toy17tWDRdSQ1sxEWYJkHyhCplSg6oYOEwZwKa3PcWDLYIQu97Ga-1A9nT5_ecBx3WIbaiGFy9KFADPvns6Ch3tFZubL5GJQ8aUt_eqz0J-c6AZrJ9pf_50rdORaZbFtLhs_JRxKAKIb57o1JIf8MY-gmRFMADiJI55ujf9Ssej-cLo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50"></div>
+</div>
+<div class="relative z-10 text-center px-6">
+<h1 class="font-display text-[12rem] md:text-[24rem] leading-none text-primary-container opacity-20 select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 tracking-tighter">
+                    BZ
+                </h1>
+<div class="space-y-6">
+<p class="font-label text-primary tracking-[0.3em] uppercase text-xs md:text-sm">Botezini High-End Uniforms</p>
+<h2 class="font-display text-4xl md:text-7xl text-on-surface max-w-4xl mx-auto leading-tight italic">
+                        A Excelência em Vestir o Seu Negócio
+                    </h2>
+<div class="flex justify-center pt-8">
+<div class="w-px h-24 bg-gradient-to-b from-primary to-transparent"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Brand Manifesto -->
+<section class="py-32 px-12 bg-surface">
+<div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+<div class="md:col-span-7 space-y-12">
+<h3 class="font-headline text-primary text-4xl italic">Nossa Essência</h3>
+<p class="font-serif-body text-2xl md:text-3xl leading-relaxed text-on-surface-variant relative">
+<span class="float-left text-primary font-display text-8xl mr-6 leading-[0.8] mt-2">A</span>
+                        BZ Botezini transcende o conceito de vestuário corporativo. Projetamos armaduras de confiança. Cada costura é um compromisso com a precisão arquitetônica, cada tecido é selecionado por sua performance e tato luxuoso. Entendemos que o uniforme é a primeira camada da sua identidade de marca no mundo físico.
+                    </p>
+<p class="font-serif-body text-xl md:text-2xl italic text-outline">
+                        "Transformamos a funcionalidade em uma declaração de prestígio."
+                    </p>
+</div>
+<div class="md:col-span-5 aspect-[3/4] bg-surface-container-high border border-outline-variant/10 relative">
+<img class="w-full h-full object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-700" data-alt="Bespoke tailor measuring dark luxury wool fabric on a minimalist black wooden workbench in an upscale atelier" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNvHgYe4dPNFyee2PokQ5PE_41syLkHz5O11QCOC6e7gWQ8lJprloBckXQV4DkASpxT7q_dmLSp0lEvGA7lM2Q5Y1WKzRgxhNrBTtXUxR9rjoXzAGP1mFBMqy2o_qpqnRMpatjGGHjAbC3K6PUqdwWdPcerJ3YKo9txcJx-BhMmnhWCtWGqUWETJG5hVgXJ1xRQobd9PogxypjO6yidEKJcZDeWjhFOt_p7-noVprlu4LljHTJShi-D_UAWDoVoPWTagj_pH7KaA8R"/>
+</div>
+</div>
+</section>
+<!-- Interactive Line Navigation Grid -->
+<section class="bg-surface-container-lowest">
+<div class="grid grid-cols-1 md:grid-cols-4 min-h-[600px]">
+<!-- Industrial -->
+<div class="group relative overflow-hidden border-r border-outline-variant/10">
+<div class="absolute inset-0 bg-surface-container-high translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition-opacity" data-alt="Technical professional wearing high-end industrial protective gear in a high-tech clean facility with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxYgRokO7J1m_Ug6whH30gqx4GAukbJMeHQRsN31Qz5kHVEFex_7OyINlCSWpRbvTUaPdtNYm1el8a6RIzZSBfHrXhOqQWQnWfie0H85WZjObJibWuu6sbzlzI7ANpmxfQUrpou0uqDGthou5L893asuU2-xDJEOA2ShxRkAzUfEdYo1dbbdP14J4idF-jdxov4UdDJDJog4XsiGvbXn4VE549mqopgIjuOifBepTSr1bJnmxd4k5F2QR-_luEDNLSA8hmgK6kNP8A"/>
+<div class="relative h-full p-12 flex flex-col justify-between z-10">
+<span class="font-label text-[10px] tracking-widest text-primary/60">LINHA 01</span>
+<div>
+<h4 class="font-display text-3xl mb-4 text-on-surface group-hover:text-primary transition-colors">Industrial</h4>
+<p class="font-body text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                Performance técnica aliada à durabilidade extrema para ambientes de alta exigência.
+                            </p>
+</div>
+<div class="w-10 h-px bg-primary group-hover:w-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Hospitalar -->
+<div class="group relative overflow-hidden border-r border-outline-variant/10">
+<div class="absolute inset-0 bg-surface-container-high translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition-opacity" data-alt="Doctor in a minimalist modern medical office wearing premium tailored white lab coat with architectural details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGb0EpzqgH1HhCvW4CBocwjUghxur3KQZ4woNzFqZrsrPu25SexNH06xx16LPTnjCvNj0ifLxRollICZgGDOMjA_UHPoDtWAFc8IXhhasZBhRG9h54jRQQqJcB3AKXjkT6jDTrIt-ouTxMPX2hZu-Xn8IpZIaZWloilft80uaiImXNXZMh-t_Z3jDH8QbaKD9uAT07XhsP2x_9SZBAuHg7OTOoq5grZO5aTt5DUcrxV43NGeKMP_F8dWqvzBQs6a_zotXdkrrJ1slZ"/>
+<div class="relative h-full p-12 flex flex-col justify-between z-10">
+<span class="font-label text-[10px] tracking-widest text-primary/60">LINHA 02</span>
+<div>
+<h4 class="font-display text-3xl mb-4 text-on-surface group-hover:text-primary transition-colors">Hospitalar</h4>
+<p class="font-body text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                Ergonomia e tecidos inteligentes com acabamento antimicrobiano de alto padrão.
+                            </p>
+</div>
+<div class="w-10 h-px bg-primary group-hover:w-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Escritório -->
+<div class="group relative overflow-hidden border-r border-outline-variant/10">
+<div class="absolute inset-0 bg-surface-container-high translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition-opacity" data-alt="Executive in a sharp charcoal bespoke suit standing against a modern glass building facade at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfosX91jDXucohHhzqWiA7MjIA_9EVlwmlr8FrmOtRitUNy93Mfa5x0py3jwK6MgQ6Oc2uTubioL_KxtR1hfm8XCrnpRztZolaY90HX1e2HuwQSRgRgbndCyHXFI2iAiHhN4JNnP2ywhiOSp5DiaLx5O9_RUgBvY3Htqe0xPRY7buFa2eETrLiyubiIWT4XBc8kSZeXh08gv79unOXIA9TQppvBlxZkTNQKKBbvVbRX9PhN8DYwJGS-Fx5VP_J-HMK4lrSfkswLlez"/>
+<div class="relative h-full p-12 flex flex-col justify-between z-10">
+<span class="font-label text-[10px] tracking-widest text-primary/60">LINHA 03</span>
+<div>
+<h4 class="font-display text-3xl mb-4 text-on-surface group-hover:text-primary transition-colors">Escritório</h4>
+<p class="font-body text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                Alfaiataria contemporânea para a liderança que exige distinção em cada detalhe.
+                            </p>
+</div>
+<div class="w-10 h-px bg-primary group-hover:w-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Econômica -->
+<div class="group relative overflow-hidden">
+<div class="absolute inset-0 bg-surface-container-high translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition-opacity" data-alt="Modern workspace uniforms in high-quality cotton blend with clean minimalist aesthetic and subtle logo embroidery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE9yh5A3PEnCruUNcSLVxgiDFeX_Ov8DdY3VnTTTOQKmIAZ2OB9uk_WTWbM8fYKm8gqLT-J1PlREtWySYjJbpJIGq87rZLx9GAdgxs9gq8Ku6lifuxlEPaR-zJmYl5vmwWOZ0PlI9H3cpY2KZzinRpjLJ2G96znf7Qwtv8byjLn-v9MWzdESh3V9-pyB9bNBlrJ3AhNS546VNyIA6BrOEaqUx5vqwGGbZhCVTYyFyYTXHi2KM6gK_Daa3lodoF75HiaK4RZPsKD_tV"/>
+<div class="relative h-full p-12 flex flex-col justify-between z-10">
+<span class="font-label text-[10px] tracking-widest text-primary/60">LINHA 04</span>
+<div>
+<h4 class="font-display text-3xl mb-4 text-on-surface group-hover:text-primary transition-colors">Econômica</h4>
+<p class="font-body text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                O equilíbrio essencial entre custo e a qualidade reconhecida BZ para grandes equipes.
+                            </p>
+</div>
+<div class="w-10 h-px bg-primary group-hover:w-full transition-all duration-500"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section (Architectural) -->
+<section class="py-32 px-12 bg-surface flex items-center justify-center">
+<div class="max-w-screen-xl w-full grid grid-cols-1 md:grid-cols-3 gap-24 text-center">
+<div class="space-y-4">
+<p class="font-display text-7xl text-primary">25+</p>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Anos de Maestria</p>
+</div>
+<div class="space-y-4">
+<p class="font-display text-7xl text-primary">100%</p>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Personalização Premium</p>
+</div>
+<div class="space-y-4">
+<p class="font-display text-7xl text-primary">50k</p>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Projetos Entregues</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#C9A84C] text-black w-full py-12 px-12">
+<div class="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto">
+<div class="font-['Playfair_Display'] text-xl text-black mb-6 md:mb-0">BZ</div>
+<div class="flex flex-wrap justify-center gap-8 mb-6 md:mb-0">
+<a class="font-['Montserrat'] text-[10px] uppercase tracking-widest text-black/80 hover:text-black transition-opacity" href="#">Privacidade</a>
+<a class="font-['Montserrat'] text-[10px] uppercase tracking-widest text-black/80 hover:text-black transition-opacity" href="#">Termos</a>
+<a class="font-['Montserrat'] text-[10px] uppercase tracking-widest text-black/80 hover:text-black transition-opacity" href="#">Trabalhe Conosco</a>
+</div>
+<div class="font-['Montserrat'] text-[10px] uppercase tracking-widest text-black/70">
+                © 2024 BZ High-End Uniforms. All Rights Reserved.
+            </div>
+</div>
+</footer>
+</body></html>
