@@ -213,7 +213,47 @@ document.addEventListener('DOMContentLoaded', () => {
     update();
   }
 
+  // ── ELITE CUSTOM SELECT LOGIC ───────────────────
+  const customSelect = document.getElementById('customSetor');
+  if (customSelect) {
+    const trigger = customSelect.querySelector('.bz-select-trigger');
+    const display = customSelect.querySelector('#fsetor-display');
+    const hiddenInput = customSelect.querySelector('#fsetor');
+    const options = customSelect.querySelectorAll('.bz-option');
+
+    // Toggle open
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      customSelect.classList.toggle('open');
+    });
+
+    // Option selection
+    options.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = opt.getAttribute('data-value');
+        const text = opt.textContent;
+
+        // Update UI
+        display.textContent = text;
+        hiddenInput.value = val;
+        
+        // Update selection state
+        options.forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+
+        // Close
+        customSelect.classList.remove('open');
+      });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', () => {
+      customSelect.classList.remove('open');
+    });
+  }
+
   // Initialize both carousels
   init3DCarrousel('pillarsTrack', 'pillarsDots', 'pillarsLeft', 'pillarsRight', 5000);
-  init3DCarrousel('varTrack', 'varDots', 'varLeft', 'varRight', 3500);
+  init3DCarrousel('customizationTrack', 'customDots', 'customLeft', 'customRight', 3500);
 });

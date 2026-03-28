@@ -593,18 +593,18 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   #tradicao { position:relative !important; overflow:hidden !important; padding: 0 !important; }
   .tradicao-img-wrap { 
     position:absolute; inset:0; 
-    opacity:0.75 !important; 
+    opacity:0.85 !important; /* Higher contrast for clear photo */
     z-index:1 !important; 
     padding:0; margin:0; pointer-events:none; overflow:hidden; 
   }
   .tradicao-img-frame { border-radius:0; border:none; height:100% !important; width:100% !important; margin:0; padding:0; }
   .tradicao-img-frame img { 
-    filter: grayscale(10%) contrast(1.1) brightness(0.85) !important;
+    filter: grayscale(0%) contrast(1.1) brightness(0.9) !important; /* No blur, full color affinity */
     width:100% !important; height:100% !important; object-fit:cover; 
   }
   
   .tradicao-grid { grid-template-columns:1fr !important; width:100% !important; max-width:none !important; margin:0 !important; position:relative; z-index:2; padding: 0 !important; }
-  .tradicao-main-box { position:relative; z-index:10 !important; display:flex; flex-direction:column; gap:16px; width:100% !important; padding:80px 24px !important; margin-top:0 !important; }
+  .tradicao-main-box { position:relative; z-index:10 !important; display:flex; flex-direction:column; gap:16px; width:100% !important; padding:100px 24px !important; margin-top:0 !important; }
   
   .desktop-badge { display:none !important; }
   .tradicao-badge:not(.mobile-badge) { display: none !important; }
@@ -639,35 +639,51 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .feature-card:nth-child(odd):last-child,
   .vs-card:nth-child(odd):last-child { grid-column: 1 / -1 !important; margin: 0 auto !important; width: 100% !important; }
 
-  .form-group select { 
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    appearance: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 14px 12px !important; /* Slightly more room */
-    background-position: right 14px center !important;
+  /* ── ELITE CUSTOM SELECT ───────────────────── */
+  .bz-select-custom { 
+    position:relative; width:100%; cursor:pointer; 
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    border: none !important;
-    border-bottom: 2.2px solid rgba(201,168,76, 0.7) !important; 
-    border-radius: 0 !important;
-    line-height: normal !important;
-    height: 52px !important; /* Fixed height for consistency */
-    color: var(--white) !important;
-    background-color: rgba(255,255,255, 0.08) !important;
-    outline: none !important;
-    -webkit-tap-highlight-color: transparent !important;
   }
-  .form-group select option { 
-    font-family: 'Montserrat', sans-serif !important;
-    background-color: #111 !important; 
-    color: var(--white) !important;
-    padding: 10px !important;
+  .bz-select-trigger {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 12px; height:52px; box-sizing:border-box;
+    background:rgba(255,255,255, 0.08);
+    border-bottom:2.2px solid rgba(201,168,76, 0.6);
+    color:var(--white); font-weight:500; font-size:16px;
+    transition: all 0.3s ease;
   }
-  .form-group select:focus { border-bottom-color: var(--gold) !important; outline: none !important; }
+  .bz-select-custom.open .bz-select-trigger { border-bottom-color: var(--gold); }
+  
+  .bz-select-arrow {
+    width:12px; height:12px; border-right:2px solid var(--gold); border-bottom:2px solid var(--gold);
+    transform:rotate(45deg); transition: transform 0.3s ease;
+    margin-right:4px; margin-top:-4px;
+  }
+  .bz-select-custom.open .bz-select-arrow { transform:rotate(-135deg) translateY(-2px); }
+
+  .bz-select-options {
+    position:absolute; top:calc(100% + 2px); left:0; right:0;
+    background:#111; border:1px solid rgba(201,168,76, 0.2);
+    z-index:200; opacity:0; pointer-events:none; visibility:hidden;
+    transition: all 0.3s ease; transform: translateY(10px);
+    max-height:0; overflow:hidden;
+  }
+  .bz-select-custom.open .bz-select-options {
+    opacity:1; pointer-events:auto; visibility:visible;
+    transform: translateY(0); max-height:300px;
+  }
+  
+  .bz-option {
+    padding:14px 12px; color:rgba(255,255,255, 0.8);
+    font-size:15px; border-bottom:1px solid rgba(255,255,255, 0.05);
+    transition: all 0.2s ease;
+  }
+  .bz-option:last-child { border:none; }
+  .bz-option:hover { background:rgba(201,168,76, 0.15); color:var(--gold); }
+  .bz-option.selected { background:var(--gold); color:#000; font-weight:600; }
+
+  /* Removing old select styles as they are no longer used */
+  .form-group select { display: none !important; }
 
   /* Grid Density Overrides with Respiro (Breathing Room) */
   .products-grid { padding:24px 0; gap:24px; grid-template-columns: repeat(2, 1fr) !important; }
