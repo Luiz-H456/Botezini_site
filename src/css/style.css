@@ -517,7 +517,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 
 /* ── RESPONSIVE ──────────────────────────────── */
 @media (max-width:900px) {
-  .tradicao-card::after { border:1px solid rgba(201,168,76,0.3); }
+  .tradicao-card:not(:first-child)::after { border:1px solid rgba(201,168,76,0.3); }
   .section { padding:60px 40px; }
   .two-col, .three-col { grid-template-columns:1fr; gap:40px; }
   .lines-grid { grid-template-columns:1fr 1fr; }
