@@ -492,7 +492,20 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .processo-num { font-family:var(--f-display); font-size:72px; color:rgba(201,168,76,.07); line-height:1; font-weight:900; position:absolute; top:-10px; left:-6px; }
 .processo-title { font-family:var(--f-display); font-size:22px; color:var(--gold); margin-bottom:14px; font-weight:700; position:relative; z-index:1; }
 .processo-desc { font-family:var(--f-body); font-size:17px; color:#aaa; line-height:1.8; font-weight:400; }
-.tradicao-card { background:rgba(247, 242, 232, 0.7); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); padding:24px; border-radius:12px; border:1px solid rgba(255, 255, 255, 0.25); box-shadow:0 10px 40px rgba(0,0,0,0.05); text-shadow:0 0 12px var(--paper); }
+.tradicao-card { 
+  background:rgba(247, 242, 232, 0.6); 
+  backdrop-filter:blur(10px); 
+  -webkit-backdrop-filter:blur(10px); 
+  padding:24px; 
+  border-radius:12px; 
+  position:relative;
+  text-shadow:0 0 12px var(--paper);
+}
+/* 1px Golden Border following mask logic */
+.tradicao-card::after {
+  content:''; position:absolute; inset:0; border-radius:inherit;
+  border:1px solid rgba(201,168,76,0.3); pointer-events:none; z-index:1;
+}
 .tradicao-card .sec-label, .tradicao-card .sec-title, .tradicao-card .body-lg, .tradicao-card .tradicao-bullet { margin-bottom:0 !important; }
 
 /* ── RESPONSIVE ──────────────────────────────── */
@@ -529,11 +542,48 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .pillar[data-pos="1"] { transform:translateX(180px) rotateY(-15deg) scale(0.8); }
   .pillar[data-pos="-1"] { transform:translateX(-180px) rotateY(15deg) scale(0.8); }
   .pillar[data-pos="2"], .pillar[data-pos="-2"] { opacity:0; pointer-events:none; }
-  .tradicao-grid { position:relative; z-index:1; grid-template-columns:1fr !important; gap:0 !important; margin:0 !important; width:100% !important; min-height:460px; }
-  .tradicao-content-box { position:relative; z-index:2; background:transparent; padding:40px 24px; border-radius:0; width:100%; }
+  .tradicao-main-box { position:relative; z-index:2; display:flex; flex-direction:column; gap:16px; width:100%; padding:0 24px 40px; }
+  .tradicao-card { border-radius:16px; margin:0; }
+  
+  /* Mobile First Card: Transparent base to host the cutout layers */
+  .tradicao-card:first-child { 
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    padding-top: 40px; padding-right: 105px;
+    box-shadow: none !important;
+  }
+  
+  /* Glass card layer with precision radial mask */
+  .tradicao-card:first-child::before {
+    content:''; position:absolute; inset:0; border-radius:16px;
+    background:rgba(247, 242, 232, 0.65);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(201,168,76,0.6);
+    /* Cutout centered at (right 45px, top 40px) with radius 64px */
+    mask-image: radial-gradient(circle 64px at calc(100% - 45px) 40px, transparent 63.5px, black 64.5px);
+    -webkit-mask-image: radial-gradient(circle 64px at calc(100% - 45px) 40px, transparent 63.5px, black 64.5px);
+    z-index:-1;
+  }
+  
+  /* The Golden Ring: Perfectly traces the cutout and frames the badge */
+  .tradicao-card:first-child::after {
+    content:''; position:absolute;
+    width:128px; height:128px; /* 64px radius */
+    border-radius:50%;
+    border:1px solid rgba(201,168,76,0.6);
+    top:-24px;   /* 40px (center y) - 64px (radius) */
+    right:-19px; /* 45px (center x offset) - 64px (radius) */
+    pointer-events:none; z-index:1;
+    /* Clip path trims the outer half of the ring so it acts solely as an inward curved border */
+    clip-path: polygon(-50% -50%, 150% -50%, 150% 150%, -50% 150%);
+  }
+
   .tradicao-img-wrap { position:absolute; inset:0; opacity:0.18; z-index:0; padding-bottom:0; pointer-events:none; }
   .tradicao-img-frame { border-radius:0; border:none; height:100%; width:100%; }
   .tradicao-img-frame img { filter:grayscale(100%); width:100%; height:100%; object-fit:cover; }
+  .tradicao-badge { display:flex !important; position:absolute; top:-25px; right:-20px; z-index:10; transform:scale(0.85); box-shadow:0 10px 40px rgba(0,0,0,0.3); background:var(--gold); }
   .section.paper { position:relative; overflow:hidden; padding:0 !important; background:var(--paper) !important; }
   .tradicao-bullets { margin-top:20px; text-shadow: none; }
   .processo-grid { grid-template-columns:1fr 1fr !important; gap:30px; }
@@ -566,7 +616,6 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .stats-grid { grid-template-columns:1fr 1fr; }
   .footer { padding:24px 20px; flex-direction:column; text-align:center; }
   .processo-grid { grid-template-columns:1fr 1fr !important; gap:20px; }
-  .tradicao-badge { display:none; }
   .pillars-arrow { display:none; }
   .pillar { width:200px; margin-left:-100px; padding:24px 16px; }
   .pillar[data-pos="1"] { transform:translateX(110px) rotateY(-10deg) scale(0.8); }
