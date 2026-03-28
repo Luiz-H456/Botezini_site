@@ -197,51 +197,56 @@
       const duration = spacing * 1.6; /* 60% de overlap base */
       
       cards.forEach((card, i) => {
-        cardItems.push({ card, start: startScroll + i * spacing, duration, type });
+        const item = { card, start: startScroll + i * spacing, duration, type };
+        
+        /* CACHING DE DOM: Impede milhares de pesquisas (.querySelector) em tempo real durante a rolagem */
+        if (type === 'line') {
+          item.bg = card.querySelector('.line-card-bg');
+          item.arrow = card.querySelector('.line-card-arrow');
+          item.bar = card.querySelector('.line-card-bar');
+        } else if (type === 'product') {
+          item.photo = card.querySelector('.product-photo');
+          item.svg = card.querySelector('.product-illus svg');
+        }
+        
+        cardItems.push(item);
       });
     });
   }
 
-  function applyCard(card, intensity, type) {
+  function applyCard(item, intensity) {
     const i = intensity;
+    const { card, type, bg, arrow, bar, photo, svg } = item;
+    
     if (type === 'feature') {
       card.style.transform   = `translateY(${(-8 * i).toFixed(2)}px)`;
-      card.style.borderColor = `rgba(201,168,76,${(0.1 + 0.40 * i).toFixed(3)})`;
-      card.style.boxShadow   = `0 ${(4 + 16 * i).toFixed(0)}px ${(10 + 24 * i).toFixed(0)}px rgba(0,0,0,${(0.10 + 0.15 * i).toFixed(3)})`;
+      card.style.borderColor = `rgba(201,168,76,${(0.1 + 0.40 * i).toFixed(2)})`;
+      card.style.boxShadow   = `0 ${Math.round(4 + 16 * i)}px ${Math.round(10 + 24 * i)}px rgba(0,0,0,${(0.10 + 0.15 * i).toFixed(2)})`;
     } else if (type === 'line') {
-      const bg = card.querySelector('.line-card-bg');
-      const arrow = card.querySelector('.line-card-arrow');
-      const bar = card.querySelector('.line-card-bar');
       card.style.transform = `translateY(${(-8 * i).toFixed(2)}px)`;
       if (bg) {
-        bg.style.transform = `scale(${(1 + 0.05 * i).toFixed(3)})`;
+        bg.style.transform = `scale(${(1 + 0.05 * i).toFixed(2)})`;
         bg.style.filter = `brightness(${(1 + 0.2 * i).toFixed(2)})`;
       }
       if (arrow) arrow.style.color = i > 0.5 ? 'var(--gold)' : '';
       if (bar) bar.style.opacity = (i * 1.5).toFixed(2);
     } else {
       card.style.transform   = `translateY(${(-5 * i).toFixed(2)}px)`;
-      card.style.borderColor = `rgba(201,168,76,${(0.05 + 0.30 * i).toFixed(3)})`;
-      card.style.boxShadow   = `0 ${(4 + 28 * i).toFixed(0)}px ${(10 + 42 * i).toFixed(0)}px rgba(0,0,0,${(0.15 + 0.30 * i).toFixed(3)})`;
-      const photo = card.querySelector('.product-photo');
-      const svg   = card.querySelector('.product-illus svg');
-      if (photo) photo.style.opacity = (i * i).toFixed(3);
-      if (svg)   svg.style.opacity   = (1 - i * 0.85).toFixed(3);
+      card.style.borderColor = `rgba(201,168,76,${(0.05 + 0.30 * i).toFixed(2)})`;
+      card.style.boxShadow   = `0 ${Math.round(4 + 28 * i)}px ${Math.round(10 + 42 * i)}px rgba(0,0,0,${(0.15 + 0.30 * i).toFixed(2)})`;
+      if (photo) photo.style.opacity = (i * i).toFixed(2);
+      if (svg)   svg.style.opacity   = (1 - i * 0.85).toFixed(2);
     }
   }
 
-  function clearCard(card, type) {
+  function clearCard(item) {
+    const { card, type, bg, arrow, bar, photo, svg } = item;
     card.style.transform = card.style.borderColor = card.style.boxShadow = '';
     if (type === 'line') {
-      const bg = card.querySelector('.line-card-bg');
-      const arrow = card.querySelector('.line-card-arrow');
-      const bar = card.querySelector('.line-card-bar');
       if (bg) { bg.style.transform = ''; bg.style.filter = ''; }
       if (arrow) arrow.style.color = '';
       if (bar) bar.style.opacity = '';
     } else if (type === 'product') {
-      const photo = card.querySelector('.product-photo');
-      const svg   = card.querySelector('.product-illus svg');
       if (photo) photo.style.opacity = '';
       if (svg)   svg.style.opacity = '';
       card.classList.add('bz--done');
@@ -298,7 +303,7 @@
   let roiDone = false, roiAt = Infinity;
   function initROI() {
     const s = document.querySelector('.roi-calc-summary');
-    if (s) roiAt = pageTop(s) - window.innerHeight * 0.4;
+    if (s) roiAt = pageTop(s) - window.innerHeight * 0.7;
   }
   function fireROI() {
     if (roiDone || reduced) return;
@@ -339,7 +344,7 @@
       const p = clamp((scrollY - item.start) / item.duration, 0, 1);
       /* Se estiver exatamente fora da duração da onda, apenas zere */
       if (p <= 0 || p >= 1) {
-        if (!item.isClean) { clearCard(item.card, item.type); item.isClean = true; }
+        if (!item.isClean) { clearCard(item); item.isClean = true; }
         return;
       }
       item.isClean = false;
@@ -347,7 +352,7 @@
       
       /* Seno multiplicado para intensificar cedo e formar um plateau no topo (Math.min) */
       const intensity = Math.min(1, Math.sin(p * Math.PI) * 1.5);
-      applyCard(item.card, intensity, item.type);
+      applyCard(item, intensity);
     });
     
     /* Carousels */
