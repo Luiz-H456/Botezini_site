@@ -39,8 +39,8 @@ html { scrollbar-color: rgba(201,168,76,0.3) var(--ink); scrollbar-width: thin; 
 
 /* ── RESET ───────────────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
-body { background:var(--ink); color:var(--white); font-family:var(--f-ui); font-weight:400; line-height:1.6; overflow-x:hidden; }
+html { scroll-behavior:smooth; font-size:16px; overflow-x:hidden; }
+body { background:var(--ink); color:var(--white); font-family:var(--f-ui); font-weight:400; line-height:1.6; overflow-x:hidden; overscroll-behavior-x:none; }
 ::selection { background:rgba(201,168,76,.35); color:var(--white); }
 
 /* ── CENTERED CONTAINER ──────────────────────── */
@@ -116,7 +116,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 
 /* ── PILLARS 3D CARROUSEL ─────────────────────── */
 .pillars-container { margin-top:60px; position:relative; padding:60px 0 20px; overflow:visible; }
-.pillars-scene { perspective:1000px; width:100%; display:flex; align-items:center; justify-content:center; height:360px; overflow:visible; position:relative; }
+.pillars-scene { perspective:1000px; width:100%; display:flex; align-items:center; justify-content:center; height:360px; overflow:visible; position:relative; touch-action:pan-y; }
 .pillars-track { position:relative; width:100%; height:100%; transform-style:preserve-3d; overflow:visible; }
 .pillar {
   position:absolute;
@@ -155,7 +155,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 
 /* ── VAR-CARD CAROUSEL ────────────────────────── */
 .var-carousel-wrap { position:relative; padding:40px 0 60px; overflow:visible; }
-.var-carousel-scene { perspective:1400px; width:100%; display:flex; align-items:center; justify-content:center; height:420px; overflow:visible; position:relative; }
+.var-carousel-scene { perspective:1400px; width:100%; display:flex; align-items:center; justify-content:center; height:420px; overflow:visible; position:relative; touch-action:pan-y; }
 .var-carousel-track { position:relative; width:100%; height:100%; transform-style:preserve-3d; overflow:visible; }
 .var-card {
   position:absolute;
