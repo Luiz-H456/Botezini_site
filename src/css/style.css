@@ -80,7 +80,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .hero-bz { font-family:var(--f-display); font-size:clamp(64px,22vw,200px); font-weight:900; line-height:.9; letter-spacing:-4px; background:linear-gradient(150deg, var(--gold-dd) 0%, var(--gold-d) 18%, var(--gold-l) 42%, var(--gold-ll) 54%, var(--gold) 66%, var(--gold-d) 82%, var(--gold-dd) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:16px; animation:shimmer 8s ease-in-out infinite alternate; background-size:200% auto; }
 @keyframes shimmer { 0%{background-position:0% center} 100%{background-position:100% center} }
 .hero h1 { font-family:var(--f-display); font-size:clamp(24px,4.5vw,52px); font-weight:400; font-style:italic; line-height:1.2; color:var(--white); margin-bottom:20px; }
-.hero-sub { font-family:var(--f-body); font-size:clamp(15px,2vw,18px); color:var(--gray1); letter-spacing:.5px; font-weight:300; margin-bottom:44px; line-height:1.7; max-width:640px; margin-left:auto; margin-right:auto; }
+.hero-sub { font-family:var(--f-body); font-size:clamp(15px,2vw,18px); color:var(--white); letter-spacing:.5px; font-weight:400; margin-bottom:44px; line-height:1.7; max-width:640px; margin-left:auto; margin-right:auto; background:rgba(8,8,8,0.38); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(201,168,76,0.12); padding:18px 28px; border-radius:4px; }
 .hero-rule { width:1px; height:70px; background:linear-gradient(to bottom, transparent, var(--gold), transparent); margin:0 auto 36px; }
 .hero-ctas { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
 .hero-bar { position:absolute; bottom:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--gold-dd), var(--gold-l), var(--gold-ll), var(--gold), var(--gold-l), var(--gold-dd)); z-index:3; }
@@ -471,7 +471,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .section.paper .sec-rule { background:var(--gold-d); }
 .section.paper .body-lg { color:#5a4e3a; }
 .tradicao-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
-.tradicao-img-wrap { position:relative; padding-bottom:30px; }
+.tradicao-img-wrap { position:relative; }
 .tradicao-img-frame {
   aspect-ratio:1/1;
   overflow:hidden;
@@ -735,4 +735,262 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 @media (max-width:400px) {
   .pillars-arrow, .var-arrow { display:none !important; }
   .section { padding:24px 16px; }
+}
+
+/* ═══════════════════════════════════════════════
+   BZ SCROLL NARRATIVE — Animation System v1.0
+   PRD: botezini_scroll_prd.md
+═══════════════════════════════════════════════ */
+
+/* ── ESTADO INICIAL DOS ELEMENTOS ANIMÁVEIS ── */
+/* ── Estados iniciais scroll-driven ─────────────
+   Transitions REMOVIDAS: o JS drive inline styles.
+   bz--visible = estado final (JS limpa inline e
+   adiciona a classe quando progress ≥ 1).         */
+[data-anim] { will-change: transform, opacity; }
+
+[data-anim="fade-up"]    { opacity: 0; transform: translateY(24px); }
+[data-anim="fade-up"].bz--visible    { opacity: 1; transform: none; }
+
+[data-anim="fade-left"]  { opacity: 0; transform: translateX(-16px); }
+[data-anim="fade-left"].bz--visible  { opacity: 1; transform: none; }
+
+[data-anim="wipe-h"]     { clip-path: inset(0 100% 0 0); }
+[data-anim="wipe-h"].bz--visible     { clip-path: inset(0 0% 0 0); }
+
+/* stagger container: filhos geridos via JS inline */
+[data-anim="stagger"] > * { opacity: 0; transform: translateY(20px); }
+[data-anim="stagger"] > *.bz--visible { opacity: 1; transform: none; }
+
+/* ── HERO: SEQUÊNCIA DE ENTRADA ─────────────── */
+.hero-eyebrow,
+.hero-bz,
+.hero h1,
+.hero-sub,
+.hero-rule,
+.hero-ctas {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+.hero-bz       { transition-delay: 50ms; transform: scale(0.9) translateY(0); }
+.hero-eyebrow  { transition-delay: 150ms; }
+.hero h1       { transition-delay: 250ms; }
+.hero-sub      { transition-delay: 350ms; transform: translateY(8px); }
+.hero-rule     { transition-delay: 450ms; }
+.hero-ctas     { transition-delay: 600ms; }
+
+.hero--loaded .hero-eyebrow,
+.hero--loaded .hero-bz,
+.hero--loaded .hero h1,
+.hero--loaded .hero-sub,
+.hero--loaded .hero-rule,
+.hero--loaded .hero-ctas {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Hero BG */
+.hero-bg {
+  opacity: 0;
+  transition: opacity 800ms ease-out;
+}
+.hero--loaded .hero-bg {
+  opacity: 1;
+}
+
+/* ── CTA PULSE LOOP ──────────────────────────── */
+@keyframes bzCtaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  50%       { box-shadow: 0 0 0 8px rgba(201,168,76,0.15); }
+}
+.hero--loaded .hero-ctas .btn-primary {
+  animation: bzCtaPulse 2.5s ease-in-out 1.5s infinite;
+}
+
+/* ── PROCESSO STEPS ──────────────────────────── */
+.processo-step {
+  opacity: 0;
+  transform: translateX(-16px);
+}
+.processo-step.bz--visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes bzPulse {
+  0%   { transform: scale(1.0); }
+  40%  { transform: scale(1.12); }
+  100% { transform: scale(1.0); }
+}
+.processo-num.bz--visible {
+  animation: bzPulse 600ms ease-out forwards;
+}
+
+/* ── TRADIÇÃO WIPE ───────────────────────────── */
+/* JS drive clip-path inline; sem transition */
+.tradicao-img-frame { clip-path: inset(0 100% 0 0 round 50%); }
+.tradicao-img-frame.bz--visible { clip-path: inset(0 0% 0 0 round 50%); }
+
+/* Tradição badge spin */
+@keyframes bzSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.tradicao-badge.bz--visible {
+  animation: bzSpin 600ms ease-out forwards;
+}
+
+/* Tradição bullets: scroll-driven, sem transition */
+.tradicao-bullet { opacity: 0; transform: translateX(-12px); }
+.tradicao-bullet.bz--visible { opacity: 1; transform: none; }
+
+/* ── TABELA: LINHAS COM FADE ─────────────────── */
+.calc-table tbody tr,
+.fabric-table tbody tr { opacity: 0; transform: translateX(-12px); }
+.calc-table tbody tr.bz--visible,
+.fabric-table tbody tr.bz--visible {
+  opacity: 1;
+  transform: none;
+}
+/* Linha Botezini glow */
+.calc-table .tr-highlight.bz--visible td {
+  animation: bzTableGlow 600ms ease-out 200ms forwards;
+}
+@keyframes bzTableGlow {
+  0%   { text-shadow: none; }
+  50%  { text-shadow: 0 0 12px rgba(201,168,76,0.5); }
+  100% { text-shadow: none; }
+}
+
+/* ── PLANOS ──────────────────────────────── */
+.plan-card { opacity: 0; transform: translateY(20px); }
+.plan-card.bz--visible { opacity: 1; transform: none; }
+.plan-card.bz--visible:hover { transform: translateY(-10px); }
+.plan-card.bz--visible.featured { transform: scale(1.05); }
+.plan-card.bz--visible.featured:hover { transform: translateY(-10px) scale(1.05); }
+@keyframes bzPlanPulse {
+  0%, 100% { border-color: var(--gold); box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  50%       { border-color: var(--gold-l); box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+}
+.plan-card.featured.bz--pulse { animation: bzPlanPulse 800ms ease-in-out 3; }
+
+/* ── ROI CALC ARROW BLINK ────────────────────── */
+@keyframes bzArrowBlink {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1; transform: scale(1.2); color: var(--gold-l); }
+}
+.roi-calc-arrow.bz--blink {
+  animation: bzArrowBlink 400ms ease-in-out 2;
+}
+
+/* ── ROI ECONOMIA PULSE ──────────────────────── */
+@keyframes bzEconomiaPulse {
+  0%, 100% { text-shadow: none; }
+  50%       { text-shadow: 0 0 16px rgba(201,168,76,0.6); letter-spacing: 1.5px; }
+}
+.roi-calc-msg.bz--glow {
+  animation: bzEconomiaPulse 600ms ease-in-out 1;
+}
+
+/* ── WPP FLOAT PULSE LOOP ────────────────────── */
+@keyframes bzWppPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.03); }
+}
+.wpp-float.bz--pulse-loop {
+  animation: bzWppPulse 2s ease-in-out infinite;
+}
+.wpp-float.bz--pulse-loop:hover {
+  animation: none;
+  transform: translateY(-5px) scale(1.1);
+}
+
+/* ── PARCEIROS: CONTROLE DE PLAY ─────────────── */
+.ticker-track {
+  animation-play-state: paused;
+}
+.ticker-track.bz--playing {
+  animation-play-state: running;
+}
+
+/* ── KITS STAGGER ────────────────────────────── */
+.kit-card {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+.kit-card.bz--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CONTACT FORM ─────────────────────────── */
+.form-group { opacity: 0; transform: translateY(12px); }
+.form-group.bz--visible { opacity: 1; transform: none; }
+/* Fallback: se JS não carregar/disparar, formulário fica visível */
+@media (scripting: none) {
+  .form-group { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── PRODUCT CARD: HOVER SIMULADO (BZ--FLASH) ── */
+/* Replica o que .product-card:hover faz, via classe JS */
+.product-card.bz--flash {
+  background: var(--ink4);
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.2);
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+.product-card.bz--flash::after {
+  opacity: 1;
+}
+.product-card.bz--flash .product-illus svg {
+  opacity: 0;
+  transform: scale(0.85);
+}
+.product-card.bz--flash .product-photo {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Durante onda: JS drive inline (sem transition para não lagar)
+   Após onda (bz--done): hover CSS volta a funcionar com transição  */
+.product-card                { transition: none; }
+.product-card.bz--done       { transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease; }
+.product-card.bz--done:hover { transform: translateY(-5px); border-color: rgba(201,168,76,0.25); }
+
+/* ── PREFERS-REDUCED-MOTION: OVERRIDE TOTAL ─── */
+@media (prefers-reduced-motion: reduce) {
+  [data-anim],
+  .hero-eyebrow, .hero-bz, .hero h1, .hero-sub, .hero-rule, .hero-ctas,
+  .hero-bg, .processo-step, .tradicao-img-frame, .tradicao-badge,
+  .tradicao-bullet, .calc-table tbody tr, .fabric-table tbody tr,
+  .kit-card, .form-group {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .hero--loaded .hero-ctas .btn-primary,
+  .wpp-float.bz--pulse-loop,
+  .plan-card.featured.bz--pulse,
+  .roi-calc-arrow.bz--blink,
+  .roi-calc-msg.bz--glow {
+    animation: none !important;
+  }
+  .ticker-track { animation-play-state: running !important; }
+}
+
+/* ── MOBILE: REDUZ DURAÇÃO 30% ───────────────── */
+@media (max-width: 768px) {
+  [data-anim="fade-up"]   { transition-duration: 350ms; }
+  [data-anim="fade-left"] { transition-duration: 280ms; }
+  [data-anim="wipe-h"]    { transition-duration: 490ms; }
+  .proceso-step           { transition-duration: 280ms; }
+  .tradicao-img-frame     { transition-duration: 630ms; }
 }

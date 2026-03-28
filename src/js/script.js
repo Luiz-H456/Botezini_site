@@ -211,6 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     update();
+    
+    // Expor métodos para engine de scroll do botezini poder controlar
+    track.goTo = goTo;
+    track.total = total;
+    track.stopAuto = () => clearInterval(autoTimer);
   }
 
   // ── ELITE CUSTOM SELECT LOGIC ───────────────────
@@ -255,5 +260,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize both carousels
   init3DCarrousel('pillarsTrack', 'pillarsDots', 'pillarsLeft', 'pillarsRight', 5000);
-  init3DCarrousel('customizationTrack', 'customDots', 'customLeft', 'customRight', 3500);
+  init3DCarrousel('varTrack', 'varDots', 'varLeft', 'varRight', 3500);
 });

@@ -33,7 +33,7 @@
 </nav>
 
 <!-- ══════ HERO ══════ -->
-<section id="hero" class="hero" data-spy>
+<section id="hero" class="hero" data-spy aria-label="Hero">
   <div class="hero-bg"><img src="assets/img/hero_bg.png" alt="Tecido premium com bordado dourado BZ" loading="eager"></div>
   <div class="hero-grain"></div>
   <div class="hero-glow"></div>
@@ -150,7 +150,7 @@
     <h2 class="sec-title">Do conceito à entrega impecável</h2>
     <div class="sec-rule"></div>
     <p class="body-lg" style="max-width:640px;margin-bottom:0;">Nossa cadeia foi desenhada para eliminar surpresas e entregar previsibilidade total para o seu RH e compras.</p>
-    <div class="processo-grid fade-in">
+    <div class="processo-grid">
       <div class="processo-step">
         <span class="processo-num">01</span>
         <h4 class="processo-title">Consultoria</h4>
@@ -181,7 +181,7 @@
   <h2 class="sec-title" style="max-width:700px;margin:0 auto 16px;">Uniforme barato é o que você precisa comprar menos vezes.</h2>
   <div class="sec-rule" style="margin:0 auto 40px;"></div>
   <p class="body-lg" style="max-width:700px;margin:0 auto 50px;">Sabemos que uniforme ruim é ralo de dinheiro para a empresa. Nossa engenharia foca em tecido que aguenta o tranco e em um sistema que não toma o tempo do seu RH.</p>
-  <div class="calc-table-wrapper fade-in">
+  <div class="calc-table-wrapper">
     <table class="calc-table">
       <thead><tr><th>Tipo de Fornecedor</th><th>Vida Média</th><th>Trocas/Ano</th><th>Impacto</th></tr></thead>
       <tbody>
@@ -191,7 +191,7 @@
     </table>
     <p style="font-size:12px;color:var(--gray2);margin-top:15px;">*Valores médios baseados em ambientes industriais de uso contínuo.</p>
   </div>
-  <div class="features-grid fade-in">
+  <div class="features-grid" data-anim="stagger" data-delay="120">
     <div class="feature-card"><h3>Projeto para uso real</h3><ul><li>Reforço estratégico em áreas de rasgo</li><li>Gramatura de tecido adequada à função</li><li>Costura industrial de alta tensão</li></ul></div>
     <div class="feature-card"><h3>Produção padronizada</h3><ul><li>Moldes travados: o tamanho 'M' é sempre 'M'</li><li>Cores consistentes entre diferentes lotes</li><li>Controle interno rigoroso antes do envio</li></ul></div>
     <div class="feature-card"><h3>Reposição previsível</h3><ul><li>Seu histórico salvo no nosso sistema</li><li>Sem retrabalho de aprovação para RH</li><li>Prazos de entrega definidos e cumpridos</li></ul></div>
@@ -1182,7 +1182,7 @@
   </div>
 
   <!-- Exemplo Numérico Conservador -->
-  <div class="roi-calc-summary fade-in" style="margin-top:80px;">
+  <div class="roi-calc-summary" style="margin-top:80px;">
     <div class="roi-calc-side bad">
       <span class="roi-calc-label">Custo Anual p/ Colaborador</span>
       <span class="roi-calc-val" style="color:var(--red-err);text-decoration:line-through;">R$ 340,00</span>
@@ -1253,7 +1253,7 @@
 
 <!-- ══════ STATS ══════ -->
 <section class="section black" style="padding:100px 40px;">
-  <div class="stats-grid fade-in">
+  <div class="stats-grid" data-anim="stagger" data-delay="100">
     <div><div class="stat-number">25+</div><div class="stat-label">Anos de Maestria</div></div>
     <div><div class="stat-number">100%</div><div class="stat-label">Personalização Premium</div></div>
     <div><div class="stat-number">50k</div><div class="stat-label">Peças Entregues</div></div>
@@ -1352,5 +1352,6 @@
 
 
 <script src="js/script.js"></script>
+<script src="js/scroll-anim.js"></script>
 </body>
 </html>
