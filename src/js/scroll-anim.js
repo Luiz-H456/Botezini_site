@@ -215,6 +215,9 @@
   }
 
   function applyCard(item, intensity) {
+    // PROTEÇÃO DE HOVER: Se o usuário estiver com o mouse em cima, o CSS governa (hover priority) e o JS não injeta inline styles briguentos
+    if (item.type === 'product' && item.card.matches(':hover')) return;
+
     const i = intensity;
     const { card, type, bg, arrow, bar, photo, svg } = item;
     
@@ -433,10 +436,8 @@
     let parallax = 0;
     let lastY = window.scrollY;
     
-    sec.addEventListener('mouseenter', () => { track.style.animationPlayState = 'paused'; });
-    sec.addEventListener('mouseleave', () => {
-      if (track.classList.contains('bz--playing')) track.style.animationPlayState = 'running';
-    });
+    // O usuário requisitou: "o carrossel de empresas que confiam, ele nao deve parar de girar no hover"
+    // Eventos mouseenter/mouseleave que causavam a pausa foram removidos.
     
     new IntersectionObserver(([e]) => {
       track.classList.toggle('bz--playing', e.isIntersecting);

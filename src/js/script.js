@@ -261,4 +261,43 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize both carousels
   init3DCarrousel('pillarsTrack', 'pillarsDots', 'pillarsLeft', 'pillarsRight', 5000);
   init3DCarrousel('varTrack', 'varDots', 'varLeft', 'varRight', 3500);
+
+  // ── LIGHTBOX LOGIC ──────────────────────────────
+  const lb = document.getElementById('bzLightbox');
+  const lbImg = document.querySelector('.lightbox-img');
+  const lbCap = document.querySelector('.lightbox-caption');
+  const lbClose = document.querySelector('.lightbox-close');
+
+  if (lb && lbImg) {
+    // Open Lightbox
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const photo = card.querySelector('.product-photo img');
+        const name = card.querySelector('.product-name');
+        if (photo) {
+          lbImg.src = photo.src;
+          // Mostramos o nome ou deixamos vazio
+          lbCap.textContent = name ? name.textContent : '';
+          lb.classList.add('active');
+          document.body.style.overflow = 'hidden'; // block scroll
+        }
+      });
+    });
+
+    // Close Lightbox
+    const closeLb = () => {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => { lbImg.src = ''; }, 300); // clear img after fade
+    };
+
+    if (lbClose) lbClose.addEventListener('click', closeLb);
+    lb.addEventListener('click', (e) => {
+      // close if clicked outside img
+      if (e.target === lb) closeLb();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb.classList.contains('active')) closeLb();
+    });
+  }
 });
