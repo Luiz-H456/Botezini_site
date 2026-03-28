@@ -507,6 +507,8 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   border:1px solid rgba(201,168,76,0.3); pointer-events:none; z-index:1;
 }
 .tradicao-card .sec-label, .tradicao-card .sec-title, .tradicao-card .body-lg, .tradicao-card .tradicao-bullet { margin-bottom:0 !important; }
+.mobile-badge { display:none !important; }
+.desktop-badge { display:flex !important; }
 
 /* ── RESPONSIVE ──────────────────────────────── */
 @media (max-width:900px) {
@@ -543,7 +545,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .pillar[data-pos="-1"] { transform:translateX(-180px) rotateY(15deg) scale(0.8); }
   .pillar[data-pos="2"], .pillar[data-pos="-2"] { opacity:0; pointer-events:none; }
   .tradicao-main-box { position:relative; z-index:2; display:flex; flex-direction:column; gap:16px; width:100%; padding:0 24px 40px; }
-  .tradicao-card { border-radius:16px; margin:0; }
+  .tradicao-card { border-radius:16px; margin:0; position:relative; }
   
   /* Mobile First Card: Transparent base to host the cutout layers */
   .tradicao-card:first-child { 
@@ -551,7 +553,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border: none !important;
-    padding-top: 40px; padding-right: 105px;
+    padding-top: 48px; padding-right: 56px; /* text standoff */
     box-shadow: none !important;
   }
   
@@ -560,31 +562,41 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
     content:''; position:absolute; inset:0; border-radius:16px;
     background:rgba(247, 242, 232, 0.65);
     backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    border:1px solid rgba(201,168,76,0.6);
-    /* Cutout centered at (right 45px, top 40px) with radius 64px */
-    mask-image: radial-gradient(circle 64px at calc(100% - 45px) 40px, transparent 63.5px, black 64.5px);
-    -webkit-mask-image: radial-gradient(circle 64px at calc(100% - 45px) 40px, transparent 63.5px, black 64.5px);
+    border:1px solid rgba(201,168,76,0.5);
+    /* Cutout centered exactly at Top-Right origin with 70px radius */
+    mask-image: radial-gradient(circle 70px at top right, transparent 69.5px, black 70.5px);
+    -webkit-mask-image: radial-gradient(circle 70px at top right, transparent 69.5px, black 70.5px);
     z-index:-1;
   }
   
   /* The Golden Ring: Perfectly traces the cutout and frames the badge */
   .tradicao-card:first-child::after {
     content:''; position:absolute;
-    width:128px; height:128px; /* 64px radius */
+    width:140px; height:140px; /* 70px radius * 2 */
     border-radius:50%;
     border:1px solid rgba(201,168,76,0.6);
-    top:-24px;   /* 40px (center y) - 64px (radius) */
-    right:-19px; /* 45px (center x offset) - 64px (radius) */
+    top:-70px;   /* Center at exact top edge */
+    right:-70px; /* Center at exact right edge */
     pointer-events:none; z-index:1;
-    /* Clip path trims the outer half of the ring so it acts solely as an inward curved border */
-    clip-path: polygon(-50% -50%, 150% -50%, 150% 150%, -50% 150%);
+    /* Clip path strictly isolates the bottom-left quadrant to act as the concave border */
+    clip-path: polygon(0 50%, 50% 50%, 50% 100%, 0 100%);
   }
 
   .tradicao-img-wrap { position:absolute; inset:0; opacity:0.18; z-index:0; padding-bottom:0; pointer-events:none; }
   .tradicao-img-frame { border-radius:0; border:none; height:100%; width:100%; }
   .tradicao-img-frame img { filter:grayscale(100%); width:100%; height:100%; object-fit:cover; }
-  .tradicao-badge { display:flex !important; position:absolute; top:-25px; right:-20px; z-index:10; transform:scale(0.85); box-shadow:0 10px 40px rgba(0,0,0,0.3); background:var(--gold); }
-  .section.paper { position:relative; overflow:hidden; padding:0 !important; background:var(--paper) !important; }
+  
+  /* Mobile Badge concentric with the 70px cutout */
+  .mobile-badge { 
+      display:flex !important; position:absolute; 
+      top:-65px; right:-65px; /* Centers the 130x130 badge inside the 70px ring hole */
+      z-index:15; transform:scale(0.7); 
+      box-shadow:0 10px 40px rgba(0,0,0,0.5); background:var(--gold); 
+  }
+  .desktop-badge { display:none !important; }
+  .tradicao-badge:not(.mobile-badge) { display: none !important; }
+
+  .section.paper { position:relative; overflow:hidden; padding:0 !important; background:var(--ink) !important; overflow-x: clip; }
   .tradicao-bullets { margin-top:20px; text-shadow: none; }
   .processo-grid { grid-template-columns:1fr 1fr !important; gap:30px; }
   .processo-num { font-size:54px; top:-5px; }
