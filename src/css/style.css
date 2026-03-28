@@ -408,7 +408,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .contact-form { display:flex; flex-direction:column; gap:20px; }
 .form-group { display:flex; flex-direction:column; gap:6px; }
 .form-group label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-l); font-weight:700; }
-.form-group input, .form-group select, .form-group textarea { background:rgba(255,255,255,.03); border:none; border-bottom:1px solid rgba(255,255,255,.15); color:var(--white); font-family:var(--f-ui); font-size:16px; padding:12px 4px; transition:border-color .3s; outline:none; font-weight:500; border-radius:0; -webkit-appearance:none; }
+.form-group input, .form-group select, .form-group textarea { background:rgba(255,255,255,.03); border:none; border-bottom:1px solid rgba(255,255,255,.15); color:var(--white); font-family:var(--f-ui); font-size:16px; padding:12px 4px; transition:border-color .3s; outline:none; font-weight:500; border-radius:0; -webkit-appearance:none; appearance:none; }
 .form-group select { 
   cursor:pointer; 
   appearance:none; -webkit-appearance:none; -moz-appearance:none;
@@ -507,10 +507,9 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   position:relative;
   text-shadow:0 0 12px var(--paper);
 }
-/* 1px Golden Border following mask logic */
 .tradicao-card::after {
   content:''; position:absolute; inset:0; border-radius:inherit;
-  border:1px solid rgba(201,168,76,0.3); pointer-events:none; z-index:1;
+  border:none; pointer-events:none; z-index:1;
 }
 .tradicao-card .sec-label, .tradicao-card .sec-title, .tradicao-card .body-lg, .tradicao-card .tradicao-bullet { margin-bottom:0 !important; }
 .mobile-badge { display:none !important; }
@@ -518,6 +517,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 
 /* ── RESPONSIVE ──────────────────────────────── */
 @media (max-width:900px) {
+  .tradicao-card::after { border:1px solid rgba(201,168,76,0.3); }
   .section { padding:60px 40px; }
   .two-col, .three-col { grid-template-columns:1fr; gap:40px; }
   .lines-grid { grid-template-columns:1fr 1fr; }
