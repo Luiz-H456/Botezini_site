@@ -175,7 +175,7 @@
 
 <!-- ══════ LÓGICA FINANCEIRA ══════ -->
 <section id="logica" class="section black" data-spy style="text-align:center;">
-  <span class="sec-label">02 — O Problema Real</span>
+  <span class="sec-label">04 — O Problema Real</span>
   <h2 class="sec-title" style="max-width:700px;margin:0 auto 16px;">Uniforme barato é o que você precisa comprar menos vezes.</h2>
   <div class="sec-rule" style="margin:0 auto 40px;"></div>
   <p class="body-lg" style="max-width:700px;margin:0 auto 50px;">Sabemos que uniforme ruim é ralo de dinheiro para a empresa. Nossa engenharia foca em tecido que aguenta o tranco e em um sistema que não toma o tempo do seu RH.</p>
@@ -183,8 +183,8 @@
     <table class="calc-table">
       <thead><tr><th>Tipo de Fornecedor</th><th>Vida Média</th><th>Trocas/Ano</th><th>Impacto</th></tr></thead>
       <tbody>
-        <tr><td style="color:var(--white);font-weight:700;">Confecção Comum</td><td>3 a 4 meses</td><td>3x ou mais</td><td class="text-red">Alto (Custo peça + Recompra)</td></tr>
-        <tr class="tr-highlight"><td style="color:var(--gold);font-weight:700;">Engenharia Botezini</td><td style="color:var(--white);font-weight:600;">8 a 12 meses</td><td style="color:var(--white);font-weight:600;">1x (Programada)</td><td class="text-green">Baixo (Previsibilidade)</td></tr>
+        <tr><td data-label="Fornecedor" style="color:var(--white);font-weight:700;">Confecção Comum</td><td data-label="Vida Média">3 a 4 meses</td><td data-label="Trocas/Ano">3x ou mais</td><td data-label="Impacto" class="text-red">Alto (Custo peça + Recompra)</td></tr>
+        <tr class="tr-highlight"><td data-label="Fornecedor" style="color:var(--gold);font-weight:700;">Engenharia Botezini</td><td data-label="Vida Média" style="color:var(--white);font-weight:600;">8 a 12 meses</td><td data-label="Trocas/Ano" style="color:var(--white);font-weight:600;">1x (Programada)</td><td data-label="Impacto" class="text-green">Baixo (Previsibilidade)</td></tr>
       </tbody>
     </table>
     <p style="font-size:12px;color:var(--gray2);margin-top:15px;">*Valores médios baseados em ambientes industriais de uso contínuo.</p>
@@ -967,6 +967,75 @@
                 <rect x="11" y="22.5" width="10" height="2.5" rx="0.5"/>
               </svg></div>
               <span class="var-card-name">Punho c/ Velcro</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: PERSONALIZAÇÃO -->
+        <div class="var-card">
+          <div class="var-card-header">
+            <span class="var-card-num">05</span>
+            <div>
+              <p class="var-card-label">Sua logo sempre à frente</p>
+              <h3 class="var-card-title">Personalização</h3>
+            </div>
+            <div class="var-card-line"></div>
+          </div>
+          <div class="var-card-grid">
+            <!-- BORDADO: AGULHA + BASTIDOR (HIGHLIGHTED) -->
+            <div class="var-card-item" style="background:rgba(201,168,76,0.12); border-color:rgba(201,168,76,0.4);">
+              <div class="var-card-icon"><svg viewBox="0 0 32 32" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Bastidor (Hoop) -->
+                <circle cx="16" cy="18" r="9" stroke-width="1.5" stroke-dasharray="1 1"/>
+                <!-- Agulha -->
+                <path d="M10 24 L24 10" stroke-width="2.2" />
+                <path d="M22 8 Q25 5 21 3" stroke-width="1" opacity="0.6"/>
+                <!-- Parafuso do bastidor -->
+                <rect x="14" y="7" width="4" height="2" rx="0.5" fill="#C9A84C"/>
+              </svg></div>
+              <span class="var-card-name" style="color:var(--gold-l); font-weight:700;">Bordado Industrial</span>
+            </div>
+
+            <!-- SILK: TELA + RODO -->
+            <div class="var-card-item">
+              <div class="var-card-icon"><svg viewBox="0 0 32 32" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="6" width="20" height="20" rx="1" fill="none"/>
+                <!-- Rodo (Squeegee) -->
+                <rect x="5" y="13" width="22" height="5" rx="0.5" fill="#C9A84C" fill-opacity="0.3" stroke="none"/>
+                <line x1="5" y1="13" x2="27" y2="13" stroke-width="2"/>
+                <path d="M12 9 H20" stroke-width="1" opacity="0.4"/>
+                <path d="M10 18 L10 22 M22 18 L22 22" stroke-width="1" opacity="0.4"/>
+              </svg></div>
+              <span class="var-card-name">Silk Screen</span>
+            </div>
+
+            <!-- DTF: FOTOGRAFIA / FILME -->
+            <div class="var-card-item">
+              <div class="var-card-icon"><svg viewBox="0 0 32 32" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Moldura Polaroid -->
+                <rect x="7" y="6" width="18" height="20" rx="0.5" fill="none"/>
+                <rect x="10" y="9" width="12" height="10" fill="#C9A84C" fill-opacity="0.15" stroke="none"/>
+                <line x1="7" y1="21" x2="25" y2="21" stroke-width="2"/>
+                <!-- Elementos de Foto -->
+                <circle cx="12" cy="23.5" r="1.2" fill="#C9A84C" stroke="none"/>
+                <path d="M10 14 L14 10 L22 16" fill="opacity" fill-opacity="0.1" stroke-width="1.2"/>
+              </svg></div>
+              <span class="var-card-name">Digital DTF</span>
+            </div>
+
+            <!-- SUBLIMAÇÃO: PRENSA TÉRMICA -->
+            <div class="var-card-item">
+                <div class="var-card-icon"><svg viewBox="0 0 32 32" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Base da Prensa -->
+                    <line x1="7" y1="26" x2="25" y2="26" stroke-width="2.5"/>
+                    <!-- Prancha Superior (Aberta) -->
+                    <line x1="8" y1="18" x2="22" y2="14" stroke-width="2.5"/>
+                    <path d="M22 14 L27 8" stroke-width="1.8"/> <!-- Alavanca -->
+                    <!-- Detalhes mecânicos -->
+                    <path d="M10 26 L10 18" stroke-width="1" opacity="0.4"/>
+                    <path d="M22 26 L22 14" stroke-width="1" opacity="0.4"/>
+                </svg></div>
+                <span class="var-card-name">Sublimação</span>
             </div>
           </div>
         </div>

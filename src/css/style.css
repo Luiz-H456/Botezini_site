@@ -408,10 +408,16 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .contact-form { display:flex; flex-direction:column; gap:20px; }
 .form-group { display:flex; flex-direction:column; gap:6px; }
 .form-group label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-l); font-weight:700; }
-.form-group input, .form-group select, .form-group textarea { background:rgba(255,255,255,.03); border:none; border-bottom:1px solid rgba(255,255,255,.15); color:var(--white); font-family:var(--f-ui); font-size:14px; padding:12px 4px; transition:border-color .3s; outline:none; font-weight:500; }
-.form-group input::placeholder, .form-group textarea::placeholder { color:#555; }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-bottom-color:var(--gold); box-shadow:0 4px 8px -4px rgba(201,168,76,.2); }
-.form-group select { cursor:pointer; }
+.form-group input, .form-group select, .form-group textarea { background:rgba(255,255,255,.03); border:none; border-bottom:1px solid rgba(255,255,255,.15); color:var(--white); font-family:var(--f-ui); font-size:16px; padding:12px 4px; transition:border-color .3s; outline:none; font-weight:500; border-radius:0; -webkit-appearance:none; }
+.form-group select { 
+  cursor:pointer; 
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23C9A84C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 32px !important;
+}
 .form-group select option { background:var(--ink2); color:var(--white); }
 .form-group textarea { resize:vertical; min-height:100px; }
 .contact-info { display:flex; flex-direction:column; gap:30px; }
@@ -428,9 +434,9 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .footer a:hover { opacity:1; }
 
 /* ── WPP FLOAT BUTTON ────────────────────────── */
-.wpp-float { position:fixed; bottom:28px; right:28px; z-index:9998; width:54px; height:54px; background:var(--gold); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(201,168,76,.35); transition:transform .2s, box-shadow .2s; }
-.wpp-float:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 10px 32px rgba(201,168,76,.45); }
-.wpp-float svg { width:26px; height:26px; fill:var(--ink); }
+.wpp-float { position:fixed; bottom:28px; right:28px; z-index:9998; width:54px; height:54px; background:var(--gold); display:flex; align-items:center; justify-content:center; border-radius:14px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.3), 0 0 15px rgba(201,168,76,0.1); transition:all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.wpp-float:hover { transform:translateY(-5px) scale(1.1); box-shadow:0 15px 40px rgba(0,0,0,0.4), 0 0 20px rgba(201,168,76,0.2); }
+.wpp-float svg { width:28px; height:28px; fill:var(--ink); }
 
 /* ── PARTNERS TICKER ────────────────────────── */
 .partners-section { background:var(--ink); padding:40px 0; border-top:1px solid rgba(201,168,76,0.1); border-bottom:1px solid rgba(201,168,76,0.1); overflow:hidden; }
@@ -544,8 +550,9 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .pillar[data-pos="1"] { transform:translateX(180px) rotateY(-15deg) scale(0.8); }
   .pillar[data-pos="-1"] { transform:translateX(-180px) rotateY(15deg) scale(0.8); }
   .pillar[data-pos="2"], .pillar[data-pos="-2"] { opacity:0; pointer-events:none; }
-  .tradicao-main-box { position:relative; z-index:2; display:flex; flex-direction:column; gap:16px; width:100%; padding:0 24px 40px; }
-  .tradicao-card { border-radius:16px; margin:0; position:relative; }
+  .tradicao-grid { grid-template-columns:1fr !important; width:100% !important; margin:0 !important; }
+  .tradicao-main-box { position:relative; z-index:2; display:flex; flex-direction:column; gap:16px; width:100% !important; padding:0 24px 40px; margin-top:0 !important; }
+  .tradicao-card { border-radius:16px; margin:0; position:relative; width:100% !important; }
   
   /* Mobile First Card: Transparent base to host the cutout layers */
   .tradicao-card:first-child { 
@@ -553,7 +560,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border: none !important;
-    padding-top: 48px; padding-right: 56px; /* text standoff */
+    padding-top: 8px; padding-right: 56px; /* Reduced padding (2/3 off) */
     box-shadow: none !important;
   }
   
@@ -563,40 +570,36 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
     background:rgba(247, 242, 232, 0.65);
     backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
     border:1px solid rgba(201,168,76,0.5);
-    /* Cutout centered exactly at Top-Right origin with 70px radius */
+    /* Cutout centered exactly at Top-Right origin (100% 0) with 70px radius */
     mask-image: radial-gradient(circle 70px at top right, transparent 69.5px, black 70.5px);
     -webkit-mask-image: radial-gradient(circle 70px at top right, transparent 69.5px, black 70.5px);
     z-index:-1;
   }
   
-  /* The Golden Ring: Perfectly traces the cutout and frames the badge */
+  /* The Golden Ring: Precision arc that follows the card cutout perfectly */
   .tradicao-card:first-child::after {
-    content:''; position:absolute;
-    width:140px; height:140px; /* 70px radius * 2 */
-    border-radius:50%;
-    border:1px solid rgba(201,168,76,0.6);
-    top:-70px;   /* Center at exact top edge */
-    right:-70px; /* Center at exact right edge */
+    content:''; position:absolute; inset:0; border-radius:16px;
+    background: radial-gradient(circle 70.5px at top right, transparent 69px, rgba(201,168,76,0.6) 69.5px, rgba(201,168,76,0.6) 71px, transparent 71.5px);
     pointer-events:none; z-index:1;
-    /* Clip path strictly isolates the bottom-left quadrant to act as the concave border */
-    clip-path: polygon(0 50%, 50% 50%, 50% 100%, 0 100%);
   }
 
   .tradicao-img-wrap { position:absolute; inset:0; opacity:0.18; z-index:0; padding-bottom:0; pointer-events:none; }
   .tradicao-img-frame { border-radius:0; border:none; height:100%; width:100%; }
   .tradicao-img-frame img { filter:grayscale(100%); width:100%; height:100%; object-fit:cover; }
   
-  /* Mobile Badge concentric with the 70px cutout */
+  /* Mobile Badge closer and simpler */
   .mobile-badge { 
       display:flex !important; position:absolute; 
-      top:-65px; right:-65px; /* Centers the 130x130 badge inside the 70px ring hole */
-      z-index:15; transform:scale(0.7); 
+      top:0; right:0; /* Origin-Based Anchoring */
+      transform: translate(35%, -35%) scale(0.5); /* Centered near the 70px cutout edge */
+      z-index:15;
       box-shadow:0 10px 40px rgba(0,0,0,0.5); background:var(--gold); 
   }
+  .mobile-badge span { text-shadow: none !important; font-weight:700; color:var(--ink); }
   .desktop-badge { display:none !important; }
   .tradicao-badge:not(.mobile-badge) { display: none !important; }
 
-  .section.paper { position:relative; overflow:hidden; padding:0 !important; background:var(--ink) !important; overflow-x: clip; }
+  .section.paper { position:relative; padding:30px 0 0 !important; background:var(--paper) !important; overflow-x: clip; max-width: 100vw; }
   .tradicao-bullets { margin-top:20px; text-shadow: none; }
   .processo-grid { grid-template-columns:1fr 1fr !important; gap:30px; }
   .processo-num { font-size:54px; top:-5px; }
@@ -618,9 +621,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .var-card-name { font-size:10px; }
   .var-card[data-pos="1"] { transform:translateX(calc(-50% + 80%)) rotateY(-18deg) scale(0.8); opacity:0.3; }
   .var-card[data-pos="-1"] { transform:translateX(calc(-50% - 80%)) rotateY(18deg) scale(0.8); opacity:0.3; }
-  .var-arrow { width:40px; height:40px; font-size:18px; }
-  .var-arrow--left { left:10px; transform:translateY(-50%); }
-  .var-arrow--right { right:10px; transform:translateY(-50%); }
+  .var-arrow { display:none !important; }
 }
 @media (max-width:600px) {
   .section { padding:60px 24px; }
@@ -637,6 +638,16 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .hero-bz { font-size:clamp(60px, 20vw, 100px); letter-spacing:-2px; }
   .hero h1 { font-size:22px; }
   .hero-sub { font-size:14px; }
+  
+  /* ROI Table Mobile Card Stack */
+  .calc-table-wrapper { border:none; padding:10px 0 !important; background:transparent; }
+  .calc-table, .calc-table thead, .calc-table tbody, .calc-table tr, .calc-table td { display:block; width:100%; min-width:0 !important; }
+  .calc-table thead { display:none; }
+  .calc-table tr { background:var(--ink2); border:1px solid rgba(201,168,76,0.15); margin-bottom:16px; padding:20px; border-radius:12px; }
+  .calc-table td { border:none; border-bottom:1px solid rgba(255,255,255,0.05); padding:12px 0; text-align:right; display:flex; justify-content:space-between; align-items:center; }
+  .calc-table td:last-child { border-bottom:none; }
+  .calc-table td::before { content:attr(data-label); font-family:var(--f-ui); font-size:9px; text-transform:uppercase; color:var(--gold); letter-spacing:2px; font-weight:800; text-align:left; }
+  .calc-table td style { text-align:right; }
 }
 @media (max-width:400px) {
   .pillars-arrow, .var-arrow { display:none !important; }

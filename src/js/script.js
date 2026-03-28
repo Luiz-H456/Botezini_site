@@ -60,9 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const nome = form.querySelector('#fname').value.trim();
       const empresa = form.querySelector('#fempresa').value.trim();
       const setor = form.querySelector('#fsetor').value;
+      const qtd = form.querySelector('#fqtd').value.trim();
       const msg = form.querySelector('#fmsg').value.trim();
 
-      let wppMsg = `*Novo Orçamento — Site Botezini*\n\n*Nome:* ${nome}\n*Empresa:* ${empresa}\n*Setor:* ${setor}\n*Mensagem:* ${msg}`;
+      let wppMsg = `*Novo Orçamento — Site Botezini*\n\n*Nome:* ${nome}\n*Empresa:* ${empresa}\n*Setor:* ${setor}\n*Colaboradores:* ${qtd}\n*Mensagem:* ${msg}`;
       const encoded = encodeURIComponent(wppMsg);
       window.open(`https://wa.me/5532999041457?text=${encoded}`, '_blank');
 
