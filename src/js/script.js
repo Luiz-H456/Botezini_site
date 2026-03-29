@@ -300,4 +300,41 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape' && lb.classList.contains('active')) closeLb();
     });
   }
+
+  // ── TICKER CLONING (PERFORMANCE) ────────────────
+  // Clone ticker items dynamically to avoid duplicate HTML
+  const tickerTrack = document.querySelector('.ticker-track');
+  if (tickerTrack) {
+    const items = Array.from(tickerTrack.children);
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      tickerTrack.appendChild(clone);
+    });
+  }
+
+  // ── LAZY BACKGROUNDS (PERFORMANCE) ──────────
+  const lazyBgs = document.querySelectorAll('.lazy-bg');
+  if ('IntersectionObserver' in window) {
+    const bgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const src = el.getAttribute('data-bg');
+          if (src) {
+            el.style.backgroundImage = `linear-gradient(rgba(8,8,8,0.7), rgba(8,8,8,0.7)), url('${src}')`;
+            el.classList.add('loaded');
+          }
+          bgObserver.unobserve(el);
+        }
+      });
+    }, { rootMargin: '0px 0px 200px 0px' });
+    lazyBgs.forEach(bg => bgObserver.observe(bg));
+  } else {
+    // Fallback for older browsers
+    lazyBgs.forEach(el => {
+      const src = el.getAttribute('data-bg');
+      if (src) el.style.backgroundImage = `linear-gradient(rgba(8,8,8,0.7), rgba(8,8,8,0.7)), url('${src}')`;
+    });
+  }
+
 });

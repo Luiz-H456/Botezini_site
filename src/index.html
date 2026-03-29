@@ -8,10 +8,54 @@
 <link rel="canonical" href="https://botezini.com.br/">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://patriamineira.com.br">
+<link rel="preload" href="assets/img/hero_bg.webp" as="image">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=70.0">
+<link rel="stylesheet" href="css/style.css?v=71.0">
+<style>
+  .bz-preloader { position:fixed; inset:0; background:#080808; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:100000; transition:opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+  .bz-preloader-content { text-align:center; position:relative; max-width:900px; width:100%; padding:0 40px; }
+  .bz-preloader .bz-eyebrow-ghost { font-family:'Montserrat', sans-serif; font-size:9px; letter-spacing:6px; text-transform:uppercase; margin-bottom:36px; display:block; visibility:hidden; pointer-events:none; }
+  .bz-preloader .bz-loader-logo { 
+    font-family:'Playfair Display', serif; 
+    font-size:clamp(64px, 22vw, 200px); 
+    font-weight:900; 
+    color:#C9A84C; 
+    letter-spacing:-4px; 
+    line-height:0.9;
+    animation:bzPulse 1s ease-in-out forwards; 
+    margin-bottom:16px; 
+    text-indent:-4px;
+  }
+  @keyframes bzPulse { 0% { transform:scale(0.9); opacity:0.3; filter:blur(2px) brightness(0.5); } 50% { transform:scale(1.05); opacity:1; filter:blur(0) brightness(1.2); } 100% { transform:scale(0.9); opacity:0.3; filter:blur(2px) brightness(0.5); } }
+  .bz-preloader.fade-out { opacity:0; pointer-events:none; }
+  body:has(.bz-preloader:not(.fade-out)) { overflow:hidden; }
+</style>
 </head>
 <body>
+<div id="bzPreloader" class="bz-preloader">
+  <div class="bz-preloader-content">
+    <span class="bz-eyebrow-ghost">placeholder</span>
+    <div class="bz-loader-logo">BZ</div>
+  </div>
+</div>
+<script>
+  (function(){
+    const p = document.getElementById('bzPreloader');
+    if(!p) return;
+    const h = () => {
+      if(p.classList.contains('fade-out')) return;
+      p.classList.add('fade-out');
+      const hero = document.getElementById('hero');
+      if(hero) hero.classList.add('hero-loaded');
+      setTimeout(() => { p.style.display='none'; }, 800);
+    };
+    setTimeout(h, 1000); // 1 pulso de 1s
+    window.addEventListener('load', h);
+  })();
+</script>
 
 <!-- ══════ NAV ══════ -->
 <nav>
@@ -34,7 +78,12 @@
 
 <!-- ══════ HERO ══════ -->
 <section id="hero" class="hero" data-spy aria-label="Hero">
-  <div class="hero-bg"><img src="assets/img/hero_bg.png" alt="Tecido premium com bordado dourado BZ" loading="eager"></div>
+  <div class="hero-bg">
+    <picture>
+      <source srcset="assets/img/hero_bg.webp" type="image/webp">
+      <img src="assets/img/hero_bg.png" alt="Tecido premium com bordado dourado BZ" loading="eager" fetchpriority="high" width="1920" height="1080">
+    </picture>
+  </div>
   <div class="hero-grain"></div>
   <div class="hero-glow"></div>
   <div class="hero-content">
@@ -112,7 +161,7 @@
   <div class="tradicao-grid">
     <div class="tradicao-img-wrap fade-in">
       <div class="tradicao-img-frame">
-        <img src="https://patriamineira.com.br/wp-content/uploads/2023/05/sao-joao-del-rei.jpg" alt="Vista histórica de São João del-Rei" loading="lazy">
+        <img src="https://patriamineira.com.br/wp-content/uploads/2023/05/sao-joao-del-rei.jpg" alt="Vista histórica de São João del-Rei" loading="lazy" decoding="async">
       </div>
       <div class="tradicao-badge desktop-badge">
         <span>Qualidade<br>Certificada</span>
@@ -185,7 +234,7 @@
     <table class="calc-table">
       <thead><tr><th>Tipo de Fornecedor</th><th>Vida Média</th><th>Trocas/Ano</th><th>Impacto</th></tr></thead>
       <tbody>
-        <tr><td data-label="Fornecedor" style="color:var(--white);font-weight:700;">Confecção Comum</td><td data-label="Vida Média">3 a 4 meses</td><td data-label="Trocas/Ano">3x ou mais</td><td data-label="Impacto" class="text-red">Alto (Custo peça + Recompra)</td></tr>
+        <tr class="tr-dim"><td data-label="Fornecedor" style="color:var(--gray2);font-weight:700;">Confecção Comum</td><td data-label="Vida Média">3 a 4 meses</td><td data-label="Trocas/Ano">3x ou mais</td><td data-label="Impacto" class="text-red" style="opacity:0.6;">Alto (Custo peça + Recompra)</td></tr>
         <tr class="tr-highlight"><td data-label="Fornecedor" style="color:var(--gold);font-weight:700;">Engenharia Botezini</td><td data-label="Vida Média" style="color:var(--white);font-weight:600;">8 a 12 meses</td><td data-label="Trocas/Ano" style="color:var(--white);font-weight:600;">1x (Programada)</td><td data-label="Impacto" class="text-green">Baixo (Previsibilidade)</td></tr>
       </tbody>
     </table>
@@ -248,7 +297,7 @@
 </section>
 
 <!-- ══════ OPERAÇÃO ══════ -->
-<div id="operacao" class="sec-divider" data-bg="OPERAÇÃO" data-spy style="background-image: linear-gradient(rgba(8,8,8,0.7), rgba(8,8,8,0.7)), url('assets/img/industrial.png'); background-size: cover; background-position: center;">
+<div id="operacao" class="sec-divider lazy-bg" data-bg="assets/img/industrial.webp" data-spy>
   <div class="sec-divider-content"><p class="sec-label" style="letter-spacing:4px;">Linha Operacional</p><h2 class="sec-divider-title">Alta Exigência</h2><div class="sec-divider-line"></div><p class="sec-divider-sub">Tecidos pesados e costuras que não abrem na primeira semana. <b>Foco: Alta resistência, agro, mineração, logística.</b></p></div>
 </div>
 <div class="section black" style="padding-top:40px;padding-bottom:60px;">
@@ -267,7 +316,7 @@
           <rect x="32" y="45" width="12" height="14" rx="1" />
           <rect x="56" y="45" width="12" height="14" rx="1" />
         </svg>
-        <div class="product-photo"><img src="img/camisa brim manga curta.png" alt="Camisa OP MC"></div>
+        <div class="product-photo"><img src="img/camisa brim manga curta.png" alt="Camisa OP MC" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">OP-01</div>
@@ -294,7 +343,7 @@
           <line x1="18" y1="58" x2="27" y2="62" />
           <line x1="82" y1="58" x2="73" y2="62" />
         </svg>
-        <div class="product-photo"><img src="img/camisa brim manga longa.png" alt="Camisa OP ML"></div>
+        <div class="product-photo"><img src="img/camisa brim manga longa.png" alt="Camisa OP ML" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">OP-02</div>
@@ -315,7 +364,7 @@
           <rect x="23" y="65" width="14" height="22" rx="2" />
           <rect x="53" y="65" width="14" height="22" rx="2" />
         </svg>
-        <div class="product-photo"><img src="img/calça operacional.png" alt="Calça OP"></div>
+        <div class="product-photo"><img src="img/calça operacional.png" alt="Calça OP" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">OP-03</div>
@@ -336,7 +385,7 @@
           <path d="M20 30 L28 45 L20 50 Z" />
           <path d="M70 30 L62 45 L70 50 Z" />
         </svg>
-        <div class="product-photo"><img src="img/calça jeans.png" alt="Calça Jeans"></div>
+        <div class="product-photo"><img src="img/calça jeans.png" alt="Calça Jeans" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">OP-04</div>
@@ -364,7 +413,7 @@
           <line x1="18" y1="58" x2="27" y2="62" />
           <line x1="82" y1="58" x2="73" y2="62" />
         </svg>
-        <div class="product-photo"><img src="img/macacao.png" alt="Macacão"></div>
+        <div class="product-photo"><img src="img/macacao.png" alt="Macacão" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">OP-05</div>
@@ -386,7 +435,7 @@
           <rect x="54" y="75" width="14" height="16" rx="1" />
           <rect x="32" y="45" width="10" height="12" rx="1" />
         </svg>
-        <div class="product-photo"><img src="img/jaleco operacional.png" alt="Jaleco OP"></div>
+        <div class="product-photo"><img src="img/jaleco operacional.png" alt="Jaleco OP" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">OP-06</div>
@@ -400,7 +449,7 @@
 </div>
 
 <!-- ══════ ALIMENTAR ══════ -->
-<div id="alimentar" class="sec-divider" data-bg="ALIMENTAR" data-spy style="background-image: linear-gradient(rgba(8,8,8,0.7), rgba(8,8,8,0.7)), url('assets/img/alimentar_hero.png'); background-size: cover; background-position: center;">
+<div id="alimentar" class="sec-divider lazy-bg" data-bg="assets/img/alimentar_hero.webp" data-spy>
   <div class="sec-divider-content"><p class="sec-label" style="letter-spacing:4px;">Sanitária &amp; SIF</p><h2 class="sec-divider-title">Linha Alimentar</h2><div class="sec-divider-line"></div><p class="sec-divider-sub">Adequação total a normas ANVISA/SIF com o menor custo de reposição por funcionário ativo do mercado. <b>Foco: Frigoríficos, laticínios, processamento de alimentos.</b></p></div>
 </div>
 <div class="section black" style="padding-top:40px;padding-bottom:60px;">
@@ -416,7 +465,7 @@
           <line x1="70" y1="40" x2="75" y2="44" stroke-dasharray="2 2" stroke-width="0.8" />
           <line x1="34" y1="105" x2="66" y2="105" stroke-dasharray="2 2" stroke-width="0.8" />
         </svg>
-        <div class="product-photo"><img src="img/malha pv alimenticia.png" alt="Camiseta Base Alimentar"></div>
+        <div class="product-photo"><img src="img/malha pv alimenticia.png" alt="Camiseta Base Alimentar" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">AL-01</div>
@@ -439,7 +488,7 @@
           <line x1="22" y1="116" x2="38" y2="116" stroke-dasharray="2 2" stroke-width="0.8" />
           <line x1="52" y1="116" x2="68" y2="116" stroke-dasharray="2 2" stroke-width="0.8" />
         </svg>
-        <div class="product-photo"><img src="img/calça alimenticia.png" alt="Calça Flex Laticínio"></div>
+        <div class="product-photo"><img src="img/calça alimenticia.png" alt="Calça Flex Laticínio" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">AL-02</div>
@@ -463,7 +512,7 @@
           <line x1="22" y1="63" x2="28" y2="58" />
           <line x1="78" y1="63" x2="72" y2="58" />
         </svg>
-        <div class="product-photo"><img src="img/japona alimenticia.png" alt="Japona Térmica"></div>
+        <div class="product-photo"><img src="img/japona alimenticia.png" alt="Japona Térmica" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">AL-03</div>
@@ -485,7 +534,7 @@
           <line x1="27" y1="50" x2="20" y2="45" />
           <line x1="73" y1="50" x2="80" y2="45" />
         </svg>
-        <div class="product-photo"><img src="img/avental pc - alimenticio.png" alt="Avental PVC"></div>
+        <div class="product-photo"><img src="img/avental pc - alimenticio.png" alt="Avental PVC" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">AL-04</div>
@@ -506,7 +555,7 @@
           <line x1="30" y1="40" x2="70" y2="40" stroke-dasharray="2 2" stroke-width="0.8" />
           <path d="M35 50 L65 50 M35 60 L65 60 M35 70 L65 70" stroke-width="0.5" stroke-dasharray="2 2" />
         </svg>
-        <div class="product-photo"><img src="img/touca arabe alimenticio.png" alt="Touca Árabe"></div>
+        <div class="product-photo"><img src="img/touca arabe alimenticio.png" alt="Touca Árabe" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">AL-05</div>
@@ -530,7 +579,7 @@
           <circle cx="50" cy="80" r="1.5" fill="none" />
           <rect x="33" y="45" width="10" height="12" rx="1" />
         </svg>
-        <div class="product-photo"><img src="img/macacao supervisor area limpa.png" alt="Jaleco Supervisão"></div>
+        <div class="product-photo"><img src="img/macacao supervisor area limpa.png" alt="Jaleco Supervisão" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">AL-06</div>
@@ -544,7 +593,7 @@
 </div>
 
 <!-- ══════ SAÚDE & CLÍNICA ══════ -->
-<div id="saude" class="sec-divider" data-bg="SAÚDE" data-spy style="background-image: linear-gradient(rgba(8,8,8,0.7), rgba(8,8,8,0.7)), url('assets/img/saude.png'); background-size: cover; background-position: center;">
+<div id="saude" class="sec-divider lazy-bg" data-bg="assets/img/saude.webp" data-spy>
   <div class="sec-divider-content"><p class="sec-label" style="letter-spacing:4px;">Limpeza Rápida</p><h2 class="sec-divider-title">Linha Saúde &amp; Clínica</h2><div class="sec-divider-line"></div><p class="sec-divider-sub">Fácil higienização industrial, cortes práticos. <b>Foco: Anti-contaminação, clínicas e facilities.</b></p></div>
 </div>
 <div class="section black" style="padding-top:40px;padding-bottom:60px;">
@@ -559,7 +608,7 @@
           <rect x="32" y="75" width="14" height="16" rx="1" />
           <rect x="54" y="75" width="14" height="16" rx="1" />
         </svg>
-        <div class="product-photo"><img src="img/jaleco saude.png" alt="Jaleco Clínico"></div>
+        <div class="product-photo"><img src="img/jaleco saude.png" alt="Jaleco Clínico" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">SC-01</div>
@@ -579,7 +628,7 @@
           <rect x="60" y="45" width="10" height="12" rx="1" />
           <line x1="60" y1="48" x2="70" y2="48" />
         </svg>
-        <div class="product-photo"><img src="img/scrub saude.png" alt="Túnica Scrub"></div>
+        <div class="product-photo"><img src="img/scrub saude.png" alt="Túnica Scrub" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">SC-02</div>
@@ -599,7 +648,7 @@
           <path d="M45 22 Q40 35 35 30" />
           <path d="M45 22 Q50 35 55 30" />
         </svg>
-        <div class="product-photo"><img src="img/calça saude.png" alt="Calça Conforto"></div>
+        <div class="product-photo"><img src="img/calça saude.png" alt="Calça Conforto" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">SC-03</div>
@@ -620,7 +669,7 @@
           <rect x="30" y="60" width="18" height="20" rx="1" />
           <rect x="52" y="60" width="18" height="20" rx="1" />
         </svg>
-        <div class="product-photo"><img src="img/avental saude.png" alt="Avental Proteção"></div>
+        <div class="product-photo"><img src="img/avental saude.png" alt="Avental Proteção" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">SC-04</div>
@@ -634,7 +683,7 @@
 </div>
 
 <!-- ══════ CORPORATIVA ══════ -->
-<div id="corporativa" class="sec-divider" data-bg="CORPORATIVO" data-spy style="background-image: linear-gradient(rgba(8,8,8,0.7), rgba(8,8,8,0.7)), url('assets/img/corporativo.png'); background-size: cover; background-position: center;">
+<div id="corporativa" class="sec-divider lazy-bg" data-bg="assets/img/corporativo.webp" data-spy>
   <div class="sec-divider-content"><p class="sec-label" style="letter-spacing:4px;">Linha Corporativa</p><h2 class="sec-divider-title">Administrativo</h2><div class="sec-divider-line"></div><p class="sec-divider-sub">Apresentação impecável sem complicação. <b>Foco: Alinhamento, gestão, diretoria, atendimento premium.</b></p></div>
 </div>
 <div class="section black" style="padding-top:40px;padding-bottom:60px;">
@@ -651,7 +700,7 @@
           <circle cx="50" cy="60" r="1.5" fill="#C9A84C" />
           <circle cx="50" cy="80" r="1.5" fill="#C9A84C" />
         </svg>
-        <div class="product-photo"><img src="img/tricoline executiva.png" alt="Camisa Executiva"></div>
+        <div class="product-photo"><img src="img/tricoline executiva.png" alt="Camisa Executiva" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">CORP-01</div>
@@ -669,7 +718,7 @@
           <path d="M40 25 Q50 22 60 25" />
           <rect x="46" y="27" width="8" height="22" rx="1" />
         </svg>
-        <div class="product-photo"><img src="img/polo piquet.png" alt="Polo Corporativa"></div>
+        <div class="product-photo"><img src="img/polo piquet.png" alt="Polo Corporativa" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">CORP-02</div>
@@ -688,7 +737,7 @@
           <rect x="42" y="10" width="6" height="8" rx="1" />
           <path d="M45 18 L45 40" />
         </svg>
-        <div class="product-photo"><img src="img/calça alfaiate.png" alt="Calça Alfaiataria"></div>
+        <div class="product-photo"><img src="img/calça alfaiate.png" alt="Calça Alfaiataria" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">CORP-03</div>
@@ -707,7 +756,7 @@
           <line x1="45" y1="20" x2="45" y2="35" />
           <path d="M45 80 L45 100" stroke-dasharray="2" />
         </svg>
-        <div class="product-photo"><img src="img/saia executiva.png" alt="Saia Executiva"></div>
+        <div class="product-photo"><img src="img/saia executiva.png" alt="Saia Executiva" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">CORP-04</div>
@@ -721,7 +770,7 @@
 </div>
 
 <!-- ══════ ESSENCIAL ══════ -->
-<div id="essencial" class="sec-divider" data-bg="BÁSICOS" data-spy style="background-image: linear-gradient(rgba(8,8,8,0.7), rgba(8,8,8,0.7)), url('assets/img/economica.png'); background-size: cover; background-position: center;">
+<div id="essencial" class="sec-divider lazy-bg" data-bg="assets/img/economica.webp" data-spy>
   <div class="sec-divider-content"><p class="sec-label" style="letter-spacing:4px;">Alto Volume</p><h2 class="sec-divider-title">Linha Essencial</h2><div class="sec-divider-line"></div><p class="sec-divider-sub">Para suprir grande rotatividade. <b>Foco: Custo-benefício, reposição rápida, eventos e logística.</b></p></div>
 </div>
 <div class="section black" style="padding-top:40px;padding-bottom:60px;">
@@ -732,7 +781,7 @@
           <path d="M40 25 L15 35 L20 48 L30 40 L30 105 L70 105 L70 40 L80 48 L85 35 L60 25 Q50 32 40 25 Z" />
           <path d="M40 25 Q50 32 60 25 Q50 18 40 25 Z" />
         </svg>
-        <div class="product-photo"><img src="img/pv essencial.png" alt="Camiseta Básica"></div>
+        <div class="product-photo"><img src="img/pv essencial.png" alt="Camiseta Básica" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">ESS-01</div>
@@ -749,7 +798,7 @@
           <path d="M40 25 L15 40 L22 50 L30 42 L30 105 L70 105 L70 42 L78 50 L85 40 L60 25 Q50 28 40 25 Z" />
           <path d="M40 25 Q50 22 60 25" />
         </svg>
-        <div class="product-photo"><img src="img/piquet essencial.png" alt="Polo Piquet"></div>
+        <div class="product-photo"><img src="img/piquet essencial.png" alt="Polo Piquet" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">ESS-02</div>
@@ -768,7 +817,7 @@
           <rect x="42" y="10" width="6" height="8" rx="1" />
           <path d="M45 18 L45 40 Q40 40 40 35" />
         </svg>
-        <div class="product-photo"><img src="img/calça essencial.png" alt="Calça Básica"></div>
+        <div class="product-photo"><img src="img/calça essencial.png" alt="Calça Básica" loading="lazy" decoding="async" width="300" height="300"></div>
         <div class="hover-hint">Ver Foto</div>
       </div>
       <div class="product-code">ESS-03</div>
@@ -1266,29 +1315,17 @@
   <p class="partners-title">Parceiros que já atestaram a confiança Botezini</p>
   <div class="ticker-wrap">
     <div class="ticker-track">
-      <!-- Original Set -->
-      <div class="ticker-item"><img src="https://alfred.alboompro.com/resize/width/370/height/150/quality/99/url/storage.alboom.ninja/sites/261239/img/logo/logo_hor.png?t=1741614330" alt="Parceiro"></div>
-      <div class="ticker-item"><img src="https://granhaligas.com/wp-content/uploads/2025/03/logo-branca-1024x576.png" alt="Granha Ligas"></div>
-      <div class="ticker-item"><img src="assets/img/partners/sao_joanense.png" alt="Têxtil São Joanense"></div>
-      <div class="ticker-item"><img src="assets/img/partners/dona_rosa.png" alt="Dona Rosa"></div>
-      <div class="ticker-item"><img src="https://queijosaovicente.com.br/wp-content/uploads/2025/10/logo-QueijoSaoVicente-min.png" alt="Queijos São Vicente"></div>
-      <div class="ticker-item"><img src="https://www.bozel.com/images/placeholders/logo_top.png" alt="Bozel"></div>
-      <div class="ticker-item"><img src="assets/img/partners/valiosa.png" alt="Valiosa Sementes"></div>
-      <div class="ticker-item"><img src="assets/img/partners/parceiro_linkedin.png" alt="Parceiro"></div>
-      <div class="ticker-item"><img src="assets/img/partners/amg.svg" alt="AMG Brasil"></div>
-      <div class="ticker-item"><img src="assets/img/partners/coca.png" alt="Novo Parceiro"></div>
-      <!-- Duplicated Set for Infinite Loop -->
-      <div class="ticker-item"><img src="https://alfred.alboompro.com/resize/width/370/height/150/quality/99/url/storage.alboom.ninja/sites/261239/img/logo/logo_hor.png?t=1741614330" alt="Parceiro"></div>
-      <div class="ticker-item"><img src="https://granhaligas.com/wp-content/uploads/2025/03/logo-branca-1024x576.png" alt="Granha Ligas"></div>
-      <div class="ticker-item"><img src="assets/img/partners/sao_joanense.png" alt="Têxtil São Joanense"></div>
-      <div class="ticker-item"><img src="assets/img/partners/dona_rosa.png" alt="Dona Rosa"></div>
-      <div class="ticker-item"><img src="https://queijosaovicente.com.br/wp-content/uploads/2025/10/logo-QueijoSaoVicente-min.png" alt="Queijos São Vicente"></div>
-      <div class="ticker-item"><img src="https://www.bozel.com/images/placeholders/logo_top.png" alt="Bozel"></div>
-      <div class="ticker-item"><img src="assets/img/partners/valiosa.png" alt="Valiosa Sementes"></div>
-      <div class="ticker-item"><img src="assets/img/partners/parceiro_instagram.jpg" alt="Parceiro"></div>
-      <div class="ticker-item"><img src="assets/img/partners/parceiro_linkedin.png" alt="Parceiro"></div>
-      <div class="ticker-item"><img src="assets/img/partners/amg.svg" alt="AMG Brasil"></div>
-      <div class="ticker-item"><img src="assets/img/partners/coca.png" alt="Novo Parceiro"></div>
+      <!-- Original Set (Cloned via JS for infinite loop) -->
+      <div class="ticker-item"><img src="assets/img/partners/alfred.png" alt="Parceiro" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/granhaligas.png" alt="Granha Ligas" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/sao_joanense.webp" alt="Têxtil São Joanense" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/dona_rosa.webp" alt="Dona Rosa" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/queijo_sao_vicente.png" alt="Queijos São Vicente" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/bozel.png" alt="Bozel" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/valiosa.webp" alt="Valiosa Sementes" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/parceiro_linkedin.webp" alt="Parceiro" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/amg.svg" alt="AMG Brasil" loading="lazy" decoding="async" width="150" height="60"></div>
+      <div class="ticker-item"><img src="assets/img/partners/coca.webp" alt="Novo Parceiro" loading="lazy" decoding="async" width="130" height="60"></div>
     </div>
   </div>
 </section>
@@ -1307,9 +1344,9 @@
         <div class="form-group"><label for="fname">Nome Completo *</label><input type="text" id="fname" required placeholder="Seu nome"></div>
         <div class="form-group"><label for="fempresa">Empresa</label><input type="text" id="fempresa" placeholder="Nome da empresa"></div>
         <div class="form-group">
-          <label for="fsetor">Setor</label>
+          <label for="selectTrigger">Setor</label>
           <div class="bz-select-custom" id="customSetor">
-            <div class="bz-select-trigger" id="selectTrigger">
+            <div class="bz-select-trigger" id="selectTrigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="fsetor-display">
               <span id="fsetor-display">Selecione...</span>
               <div class="bz-select-arrow"></div>
             </div>
@@ -1355,12 +1392,12 @@
 <!-- ══════ LIGHTBOX ══════ -->
 <div id="bzLightbox" class="lightbox">
   <button class="lightbox-close" aria-label="Fechar ampliação">&times;</button>
-  <img src="" alt="Ampliação do Produto" class="lightbox-img">
+  <img src="" alt="Ampliação do Produto" class="lightbox-img" loading="lazy" decoding="async">
   <div class="lightbox-caption"></div>
 </div>
 
 
-<script src="js/script.js"></script>
-<script src="js/scroll-anim.js"></script>
+<script src="js/script.js" defer></script>
+<script src="js/scroll-anim.js" defer></script>
 </body>
 </html>

@@ -65,17 +65,14 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 
 /* ── HERO ────────────────────────────────────── */
 #hero.hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding:100px 40px; z-index:50 !important; background:var(--ink) !important; }
-#hero .hero-bg { position:absolute; inset:0; z-index:0; 
-  background-image: url('../assets/img/hero_bg.png') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-}
-#hero .hero-bg img { display: none !important; opacity:0 !important; }
+#hero .hero-bg { position:absolute; inset:0; z-index:0; }
+#hero .hero-bg img { width:100% !important; height:100% !important; object-fit:cover !important; opacity:0; transition:opacity 0.8s ease; display:block !important; }
+#hero.hero-loaded .hero-bg img { opacity:1; }
 #hero .hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, var(--ink) 5%, transparent 40%, rgba(8,8,8,.6) 100%); z-index:2; }
 .hero-grain { position:absolute; inset:0; pointer-events:none; z-index:3; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); opacity:.7; }
 .hero-glow { position:absolute; width:700px; height:700px; border-radius:50%; background:radial-gradient(ellipse, rgba(201,168,76,.08) 0%, transparent 70%); top:40%; left:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:4; }
-.hero-content { position:relative; z-index:10; max-width:900px; }
+.hero-content { position:relative; z-index:10; max-width:900px; opacity:0; transition:opacity 0.8s ease; }
+#hero.hero-loaded .hero-content { opacity:1; }
 .hero-eyebrow { font-size:9px; letter-spacing:6px; text-transform:uppercase; color:var(--gold); margin-bottom:36px; display:block; }
 .hero-bz { font-family:var(--f-display); font-size:clamp(64px,22vw,200px); font-weight:900; line-height:.9; letter-spacing:-4px; background:linear-gradient(150deg, var(--gold-dd) 0%, var(--gold-d) 18%, var(--gold-l) 42%, var(--gold-ll) 54%, var(--gold) 66%, var(--gold-d) 82%, var(--gold-dd) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:16px; animation:shimmer 8s ease-in-out infinite alternate; background-size:200% auto; }
 @keyframes shimmer { 0%{background-position:0% center} 100%{background-position:100% center} }
@@ -1051,4 +1048,82 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
   .lightbox-close { top:15px; right:15px; font-size:40px; }
   .lightbox-caption { font-size:18px; }
   .lightbox-img { max-height:75vh; }
+
+
+  /* MESA DE TECIDOS MOBILE: Scroll lateral apenas nela */
+  .fabric-table-wrapper { overflow-x:auto !important; -webkit-overflow-scrolling:touch !important; width:100% !important; padding-bottom:12px; }
+
+  /* TRADIÇÃO MOBILE: Quadrada e sem animação */
+  .tradicao-img-frame { border-radius:0 !important; clip-path:none !important; animation:none !important; transform:none !important; opacity:1 !important; transition:none !important; }
+
+  /* O PROBLEMA REAL (CALC-TABLE) MOBILE: Dividir compararção em dois cards verticais */
+  .calc-table-wrapper { overflow:visible !important; width:100% !important; padding:0 !important; }
+  .calc-table { display:block !important; border:none !important; width:100% !important; margin:0 !important; min-width:0 !important; }
+  .calc-table thead { display:none !important; }
+  .calc-table tbody, .calc-table tbody tr { display:flex !important; flex-direction:column !important; gap:16px !important; width:100% !important; }
+  .calc-table tbody { gap: 24px !important; }
+  .calc-table tbody tr { 
+    background:var(--ink4) !important; 
+    border:1px solid rgba(255,255,255,0.05) !important;
+    border-radius:12px !important; 
+    padding:24px 20px !important;
+    box-sizing:border-box !important;
+  }
+  .calc-table td { 
+    display:flex !important; justify-content:space-between !important; align-items:center !important; 
+    padding:12px 0 !important; border:none !important;
+    box-sizing:border-box !important; text-align:right !important;
+  }
+  .calc-table td::before { 
+    content:attr(data-label) !important; 
+    font-size:11px !important; text-transform:uppercase !important; 
+    letter-spacing:1px !important; color:var(--gold) !important;
+    text-align:left !important; flex:1 !important;
+  }
+  .calc-table td[data-label="Fornecedor"] { 
+    justify-content:center !important; font-size:20px !important; margin-bottom:12px !important; 
+    border-bottom:1px solid rgba(255,255,255,0.05) !important; padding-bottom:16px !important;
+    text-align:center !important;
+  }
+  .calc-table td[data-label="Fornecedor"]::before { display:none !important; }
+
+  /* CORREÇÃO DAS MARGENS (DIREITA COLADA) DOS DEMAIS CARDS */
+  .features-grid {
+    grid-template-columns:1fr !important;
+    padding:0 20px !important; /* Afasta das bordas da tela */
+    margin-top:40px !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+  }
 }
+
+/* ── PRELOADER ── */
+
+/* MELHORIA ROI MOBILE */
+@media (max-width: 768px) {
+  .roi-grid { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 32px !important; 
+    padding: 0 20px !important;
+    margin-top: 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .vs-card { width: 100% !important; box-sizing: border-box !important; }
+  .vs-card.competitor { opacity: 0.4 !important; transform: scale(0.95) !important; filter: grayscale(1); }
+  .vs-card.botezini { opacity: 1 !important; transform: none !important; border: 1px solid var(--gold); box-shadow: 0 0 20px rgba(201,168,76,0.1); }
+}
+
+.tr-dim {
+  opacity: 0.4;
+  filter: grayscale(1);
+  transition: opacity 0.3s ease;
+}
+.tr-dim:hover { opacity: 0.7; filter: none; }
+
+.tr-highlight {
+  background: rgba(201,168,76,0.05) !important;
+  border-left: 3px solid var(--gold) !important;
+}
+
