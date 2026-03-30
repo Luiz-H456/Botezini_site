@@ -305,7 +305,7 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 .line-card:hover .line-card-bar { width:100%; }
 
 /* ── SECTION DIVIDER ─────────────────────────── */
-.sec-divider { min-height:36vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; background:var(--ink3); text-align:center; padding:60px 20px; }
+.sec-divider { min-height:42vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; background:var(--ink3); text-align:center; padding:100px 20px; background-size:cover; background-position:center; background-repeat:no-repeat; }
 .sec-divider::before { content:attr(data-bg); position:absolute; font-family:var(--f-display); font-size:clamp(60px,14vw,200px); font-weight:700; color:rgba(201,168,76,.04); top:50%; left:50%; transform:translate(-50%,-50%); white-space:nowrap; pointer-events:none; }
 .sec-divider-content { position:relative; z-index:1; }
 .sec-divider-title { font-family:var(--f-display); font-size:clamp(28px,6vw,56px); color:var(--white); font-weight:700; line-height:1; margin-bottom:15px; }
@@ -413,16 +413,20 @@ nav.scrolled { background:rgba(8,8,8,.97); border-bottom-color:rgba(201,168,76,.
 
 /* ── FABRIC TABLE ────────────────────────────── */
 .fabric-table-wrapper { 
-  overflow: hidden; 
+  overflow-x: auto; 
   max-width: 1000px; 
   margin: 40px auto 0; 
-  padding: 0 5px; /* Alívio para o transform translateX não bater na borda e causar scroll */
+  padding: 0 5px;
+  -webkit-overflow-scrolling: touch;
 }
+.fabric-table-wrapper::-webkit-scrollbar { height: 4px; }
+.fabric-table-wrapper::-webkit-scrollbar-thumb { background: rgba(201,168,76, 0.2); border-radius: 10px; }
 .fabric-table { width:100%; border-collapse:collapse; min-width:700px; }
 .fabric-table th { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold-l); padding:15px 18px; text-align:left; border-bottom:1px solid rgba(201,168,76,.3); }
 .fabric-table td { padding:16px 18px; font-size:14px; color:#b0b0b0; border-bottom:1px solid rgba(255,255,255,.06); font-weight:500; }
 .fabric-table tr:hover td { background:rgba(201,168,76,.04); }
-.fabric-table td:first-child { color:var(--white); font-weight:700; }
+.fabric-table td:first-child { color:var(--white); font-weight:700; width: 20%; }
+.fabric-ref { font-size: 0.85em; color: var(--gray1); font-weight: 500; display: block; margin-top: 4px; line-height: 1.4; }
 
 /* ── CONTACT ─────────────────────────────────── */
 .contact-section { position:relative; overflow:hidden; }
