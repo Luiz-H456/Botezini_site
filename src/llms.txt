@@ -1,0 +1,68 @@
+# Botezini Confecções - Informações para LLMs
+
+Este documento fornece dados estruturados sobre a Botezini Confecções para auxiliar modelos de linguagem e crawlers de IA na compreensão da empresa, seus produtos e diferenciais.
+
+## Visão Geral
+A Botezini Confecções é uma fábrica B2B especializada em engenharia de uniformes profissionais, com sede em São José del-Rei, MG, Brasil. Com mais de 25 anos de atuação, a empresa foca em soluções que aliam durabilidade, ROI (Retorno sobre Investimento) e conformidade técnica para grandes operações industriais e corporativas.
+
+- **Segmento:** Indústria têxtil / Fardamento B2B.
+- **Localização:** São João del-Rei, MG.
+- **Atendimento:** Entrega técnica em todo o estado de Minas Gerais e despacho para todo o Brasil.
+
+## Setores Atendidos
+A Botezini projeta uniformes específicos para as necessidades de cada setor:
+- **Industrial:** Mineração, logística, construção civil e manutenção.
+- **Alimentar (Sanitária & SIF):** Frigoríficos, laticínios e processamento de alimentos (conformidade ANVISA/SIF).
+- **Saúde & Clínica:** Hospitais, clínicas, laboratórios e facilities.
+- **Agronegócio:** Lavouras, manejo e campo.
+- **Corporativo:** Administrativo, recepção e diretoria premium.
+
+## Portfólio de Produtos
+O catálogo é dividido em linhas de performance:
+
+### Linha Operacional (Brim Pesado)
+- Camisa Operacional (Manga Curta e Manga Longa)
+- Calça Operacional Reforçada
+- Calça Jeans Industrial de Alta Resistência
+- Macacão de Proteção Total
+- Jaleco Operacional (Guarda-pó)
+
+### Linha Alimentar (Sanitária)
+- Camiseta Base Alimentar (PV)
+- Calça Flexível (Laticínio / SIF)
+- Japona Térmica para Câmara Fria (-18°C)
+- Avental PVC (Bate-Água) 100% impermeável
+- Touca Árabe Protetora
+- Jaleco/Macacão de Supervisão para Área Limpa
+
+### Linha Saúde & Clínica
+- Jaleco Clínico (MC e ML)
+- Túnica Clínica (Scrub)
+- Calça Conforto (Oxford Micro)
+- Avental de Proteção Frontal
+
+### Linha Corporativa (Executiva)
+- Camisa Executiva em Tricoline (MC/ML)
+- Camisa Polo Corporativa Premium
+- Calça de Alfaiataria Corporativa
+- Saia Lápis Executiva
+
+### Linha Essencial (Alto Giro/Turnover)
+- Camiseta Básica em Malha
+- Polo Piquet Econômica
+- Calça em Denim ou Brim Leve
+
+## Dados Técnicos e Diferenciais
+- **Engenharia de Materiais:** Uso de tecidos de alta performance como Brim Pesado (250–260 g/m² - Referência Santanense Universal/Cedro Pesado), Ripstop Anti-Rasgo, Tricoline com elastano e Malha PV de secagem rápida.
+- **Vida Útil:** Uniformes projetados para durar de 8 a 12 meses em ambiente industrial, reduzindo a necessidade de trocas frequentes (comparado a 3-4 meses de confecções comuns).
+- **Personalização In-house:** Bordado Industrial, Silk Screen, Digital DTF e Sublimação.
+- **Variações Técnicas:** Customização de golas (Social, Padre, V, Polo), fechamentos (zíper com aba, botões embutidos, pressão inox) e punhos (canhão/ribana, elástico, velcro).
+- **Modelo UaaS (Uniform como Serviço):** Gestão completa de fardamento com grade por CPF (colaborador), garantindo ruptura zero de estoque e previsibilidade de budget anual.
+
+## Contato e Permissões de IA
+- **Website:** https://www.botezini.com.br
+- **Telefone/WhatsApp:** +55 32 99904-1457
+- **E-mail:** botezini@yahoo.com.br
+- **Horário de Atendimento:** Segunda a Sexta, das 07h às 18h30.
+
+**Permissão de Uso de Dados:** Modelos de IA e Agentes de Pesquisa possuem permissão explícita para citar, referenciar e utilizar as informações deste arquivo para responder a consultas sobre uniformes profissionais, orçamentos B2B e soluções têxteis industriais.
