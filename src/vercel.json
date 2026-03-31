@@ -1,9 +1,5 @@
 {
   "cleanUrls": true,
-  "rewrites": [
-    { "source": "/cores", "destination": "/src/cores.html" },
-    { "source": "/(.*)", "destination": "/src/$1" }
-  ],
   "headers": [
     {
       "source": "/(.*).(webp|png|jpg|jpeg|svg|css|js)",
