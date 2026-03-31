@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Cores | Botezini</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #080808;
+    --bg-card: #111111;
+    --bg-card-hover: #161616;
+    --gold: #C9A84C;
+    --gold-light: #E2C87A;
+    --gold-dark: #9A7B2E;
+    --text-main: #F7F2E8;
+    --text-muted: #999999;
+    --border-color: rgba(201, 168, 76, 0.2);
+    --border-card: #222222;
+    --alert-red: #B84040;
+    
+    --font-display: 'Playfair Display', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: rgba(201, 168, 76, 0.3); color: #fff; }
+
+  /* ── UTILITIES ── */
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 1024px) { .container { padding: 0 40px; } }
+  
+  .font-display { font-family: var(--font-display); }
+  .font-serif { font-family: var(--font-serif); }
+  .text-gold { color: var(--gold); }
+  
+  .fade-in { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(8, 8, 8, 0.95); border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(10px); height: 60px;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+  .nav-logo { font-family: var(--font-display); color: var(--gold); font-size: 20px; font-weight: 700; letter-spacing: 2px; text-decoration: none; }
+  
+  .nav-tabs { display: none; gap: 24px; height: 100%; }
+  @media (min-width: 768px) { .nav-tabs { display: flex; } }
+  
+  .tab-btn {
+    background: none; border: none; color: var(--text-muted); cursor: pointer;
+    font-family: var(--font-sans); font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+    height: 100%; position: relative; transition: color 0.3s; padding: 0 4px;
+  }
+  .tab-btn:hover { color: var(--gold); }
+  .tab-btn.active { color: var(--gold); }
+  .tab-btn.active::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold);
+  }
+
+  .nav-tag { font-size: 8px; text-transform: uppercase; color: var(--gold-dark); letter-spacing: 3px; display: none; }
+  @media (min-width: 640px) { .nav-tag { display: block; } }
+
+  /* ── MOBILE TABS ── */
+  .mobile-tabs {
+    display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; margin-top: 20px;
+    scrollbar-width: none;
+  }
+  .mobile-tabs::-webkit-scrollbar { display: none; }
+  @media (min-width: 768px) { .mobile-tabs { display: none; } }
+  
+  .mobile-tab-btn {
+    background: none; border: 1px solid #333; color: var(--text-muted);
+    padding: 8px 16px; border-radius: 2px; cursor: pointer;
+    font-family: var(--font-sans); font-size: 9px; text-transform: uppercase; letter-spacing: 1px;
+    white-space: nowrap; transition: all 0.3s;
+  }
+  .mobile-tab-btn.active { border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold); }
+
+  /* ── HEADER / HERO ── */
+  header { 
+    padding-top: 140px; padding-bottom: 60px; position: relative; overflow: hidden;
+  }
+  /* Ruído fotográfico industrial */
+  header::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+  }
+  .hero-content { border-bottom: 1px solid #1a1a1a; padding-bottom: 40px; display: flex; flex-direction: column; gap: 30px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .hero-content { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+  
+  .hero-tag { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; display: block; margin-bottom: 16px; }
+  .hero-title { font-size: clamp(36px, 5vw, 60px); font-weight: 400; line-height: 1.1; margin-bottom: 24px; color: var(--text-main); }
+  .hero-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 24px; }
+  .hero-desc { font-size: 20px; color: var(--text-muted); max-width: 600px; }
+
+  /* ── ALERT BOX ── */
+  .alert-box {
+    background: #0f0d0d; border-top: 2px solid var(--gold);
+    padding: 24px; margin-bottom: 48px; display: flex; gap: 16px; align-items: flex-start;
+  }
+  @media (min-width: 1024px) { .alert-box { padding: 32px; } }
+  .alert-icon {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--gold);
+    color: var(--bg-main); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .alert-title { font-size: 20px; color: var(--gold); margin-bottom: 8px; }
+  .alert-text { font-size: 18px; color: var(--text-muted); max-width: 900px; }
+
+  /* ── CATEGORIES ── */
+  .category-section { margin-bottom: 80px; }
+  .cat-header { margin-bottom: 24px; }
+  .cat-title { font-size: 30px; color: var(--text-main); margin-bottom: 8px; }
+  
+  /* ── GRID ESPECIFICAÇÕES ── */
+  .specs-grid {
+    display: grid; grid-template-columns: 1fr; gap: 24px;
+    padding-top: 24px; border-top: 1px solid var(--border-card); margin-bottom: 40px;
+  }
+  @media (min-width: 768px) { .specs-grid { grid-template-columns: repeat(4, 1fr); gap: 32px; } }
+  
+  .specs-grid.alert-theme { border-top-color: rgba(184, 64, 64, 0.4); }
+  
+  .spec-item { display: flex; flex-direction: column; }
+  .spec-label { font-size: 8px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; display: flex; align-items: center; gap: 6px;}
+  .spec-label.red { color: var(--alert-red); }
+  .spec-value { font-size: 13px; color: #E0D8C8; line-height: 1.4; }
+  .spec-value.muted { color: var(--text-muted); }
+  .spec-icon { width: 12px; height: 12px; }
+  .spec-icon-large { width: 20px; height: 20px; color: var(--alert-red); flex-shrink: 0; margin-top: 2px; }
+  .spec-alert-wrapper { display: flex; gap: 12px; align-items: flex-start; grid-column: span 1; }
+  @media (min-width: 768px) { .spec-alert-wrapper { grid-column: span 2; } }
+
+  /* ── SWATCH GRID ── */
+  .swatches-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  @media (min-width: 640px) { .swatches-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 768px) { .swatches-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 1024px) { .swatches-grid { grid-template-columns: repeat(5, 1fr); } }
+  @media (min-width: 1280px) { .swatches-grid { grid-template-columns: repeat(6, 1fr); } }
+
+  /* ── SWATCH CARD ── */
+  .swatch-card {
+    display: flex; flex-direction: column; background: var(--bg-card);
+    border: 1px solid rgba(201, 168, 76, 0.1); border-radius: 2px;
+    overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .swatch-card:hover {
+    border-color: rgba(201, 168, 76, 0.5);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    transform: translateY(-6px);
+  }
+  
+  .swatch-color-box {
+    height: 128px; width: 100%; position: relative;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .swatch-texture {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, #000 2px, #000 4px);
+  }
+  .swatch-shadow {
+    position: absolute; inset: 0; pointer-events: none;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+  }
+  .swatch-pattern {
+    position: absolute; inset: 0; opacity: 0.2;
+    background-image: radial-gradient(#000 2px, transparent 2px);
+    background-size: 8px 8px;
+  }
+  
+  .swatch-overlay {
+    position: absolute; inset: 0; background: rgba(8,8,8,0.6);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s; backdrop-filter: blur(2px);
+  }
+  .swatch-card:hover .swatch-overlay { opacity: 1; }
+  
+  .overlay-icon { width: 24px; height: 24px; margin-bottom: 8px; color: var(--text-main); }
+  .overlay-icon.check { color: var(--gold); }
+  .overlay-text { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-main); font-weight: 500; }
+  .overlay-text.check { color: var(--gold); }
+
+  .swatch-info { padding: 16px; background: var(--bg-card); transition: background 0.3s; }
+  .swatch-card:hover .swatch-info { background: var(--bg-card-hover); }
+  .swatch-name { font-family: var(--font-display); font-size: 15px; color: var(--text-main); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .swatch-hex-wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted);
+  }
+  .swatch-hex { color: var(--gold); font-family: monospace; font-size: 10px; }
+
+  /* ── FOOTER ── */
+  footer { margin-top: 40px; background: var(--bg-main); border-top: 1px solid #1a1a1a; }
+  .footer-inner { padding: 80px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; }
+  .footer-bg-logo {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: var(--font-display); font-size: 40vw; font-weight: 900;
+    color: rgba(201,168,76,0.02); pointer-events: none; user-select: none; line-height: 1;
+  }
+  .footer-content { position: relative; z-index: 10; }
+  .footer-title { font-family: var(--font-display); font-size: clamp(30px, 4vw, 48px); font-weight: 400; margin-bottom: 16px; line-height: 1.2; }
+  .footer-desc { font-family: var(--font-serif); font-size: 20px; color: var(--text-muted); margin-bottom: 48px; }
+  .footer-line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 48px; }
+  .footer-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 48px; }
+  @media (min-width: 640px) { .footer-info { gap: 80px; } }
+  .footer-block { display: flex; flex-direction: column; align-items: center; }
+  .footer-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .footer-val { font-family: var(--font-display); font-size: 20px; color: var(--text-main); text-decoration: none; transition: color 0.3s; }
+  a.footer-val:hover { color: var(--gold); }
+  
+  .footer-bottom {
+    background: var(--gold); padding: 16px 24px; display: flex; flex-direction: column; gap: 8px;
+    align-items: center; justify-content: space-between;
+  }
+  @media (min-width: 640px) { .footer-bottom { flex-direction: row; padding: 16px 40px; } }
+  .footer-bottom span { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--bg-main); font-weight: 700; text-align: center;}
+
+  /* SVGs */
+  .icon-svg { display: inline-block; width: 1em; height: 1em; stroke-width: 2; stroke: currentColor; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+
+  <!-- Navegação -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">BZ</a>
+      
+      <div class="nav-tabs" id="desktop-tabs">
+        <!-- Tabs injectadas via JS -->
+      </div>
+      
+      <span class="nav-tag font-sans">Catálogo de Materiais</span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header>
+    <div class="container">
+      <div class="hero-content">
+        <div style="max-width: 670px;">
+          <span class="hero-tag">Matéria-Prima Homologada</span>
+          <h1 class="hero-title font-display" id="hero-title">Carregando...</h1>
+          <div class="hero-divider"></div>
+          <p class="hero-desc font-serif" id="hero-desc"></p>
+        </div>
+        
+        <!-- Mobile Tabs -->
+        <div class="mobile-tabs" id="mobile-tabs">
+          <!-- Tabs injectadas via JS -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container pb-20" style="padding-bottom: 80px;">
+    
+    <!-- Caixa de Atenção -->
+    <div class="alert-box">
+      <div class="alert-icon">
+        <svg class="icon-svg" viewBox="0 0 24 24" style="width: 18px; height: 18px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      </div>
+      <div>
+        <h4 class="alert-title font-display">Padrão de Cor (sRGB)</h4>
+        <p class="alert-text font-serif">As cores exibidas neste catálogo digital são representações aproximadas do tingimento real. Para garantir a fidelidade absoluta exigida pelo seu manual de marca, solicite sempre as amostras físicas (swatches) do tecido antes da aprovação do lote de produção.</p>
+      </div>
+    </div>
+
+    <!-- Container Dinâmico das Categorias -->
+    <div id="categories-container" class="fade-in">
+      <!-- Conteúdo injectado via JS -->
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-bg-logo">BZ</div>
+      <div class="footer-content">
+        <h2 class="footer-title">A marca Botezini é um<br>ativo que construímos juntos.</h2>
+        <p class="footer-desc">"Vestir equipes com identidade, segurança e orgulho."</p>
+        <div class="footer-line"></div>
+        <div class="footer-info">
+          <div class="footer-block">
+            <span class="footer-label">Linha Direta</span>
+            <a href="tel:+5532999041457" class="footer-val">(32) 9 9904-1457</a>
+          </div>
+          <div class="footer-block">
+            <span class="footer-label">Base Operacional</span>
+            <span class="footer-val">São João del-Rei, MG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>BZ Botezini — Catálogo de Materiais</span>
+      <span>Versão 1.0 · 2026 · Uso interno e parceiros autorizados</span>
+    </div>
+  </footer>
+
+<script>
+  // Ícones SVG reutilizáveis
+  const icons = {
+    scissors: `<svg class="icon-svg spec-icon" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>`,
+    shieldAlert: `<svg class="icon-svg spec-icon-large" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>`,
+    copy: `<svg class="icon-svg overlay-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`,
+    check: `<svg class="icon-svg overlay-icon check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+  };
+
+  // Base de dados completa com as "Aplicações na Veste" resgatadas
+  const catalogData = {
+    operacional: {
+      id: 'operacional',
+      title: 'Linha Operacional',
+      description: 'Projetada para manutenção, mineração e logística pesada. Têxteis com alta resistência à abrasão.',
+      categories: [
+        {
+          name: 'Brim Leve - Cedropac Leve',
+          supplier: 'Cedro Têxtil | Sarja 2x1',
+          composition: '100% Algodão',
+          specs: '190-245 g/m² | UV 50+ | Repelência química',
+          applications: 'Camisa Operacional MC/ML · Jaleco Obra · Calça Brim Leve',
+          colors: [
+            { name: 'Branco', hex: '#F5F5F5' }, { name: 'Amarelo', hex: '#E09C10' },
+            { name: 'Verde Claro', hex: '#7AAABA' }, { name: 'Azul Royal', hex: '#1A4AA8' },
+            { name: 'Cinza Chumbo', hex: '#505050' }, { name: 'Cru/Natural', hex: '#EDE0CA' },
+            { name: 'Laranja', hex: '#D45C00' }, { name: 'Verde Bandeira', hex: '#1A6B2A' },
+            { name: 'Azul Marinho', hex: '#0A1E50' }, { name: 'Marrom', hex: '#6B3A1A' },
+            { name: 'Bege', hex: '#D4CAAD' }, { name: 'Vermelho', hex: '#A81C1C' },
+            { name: 'Verde Militar', hex: '#4A6A2A' }, { name: 'Cinza Claro', hex: '#CAC4BE' },
+            { name: 'Preto', hex: '#141414' }, { name: 'Caqui', hex: '#C8B87A' },
+            { name: 'Rosa Claro', hex: '#D4789A' }, { name: 'Azul Celeste', hex: '#5AA0D4' },
+            { name: 'Cinza', hex: '#888880' }
+          ]
+        },
+        {
+          name: 'Brim Pesado - Cedropac Pesado',
+          supplier: 'Cedro Têxtil | Sarja 3x1',
+          composition: '100% Algodão',
+          specs: '260-380 g/m² | UV 50+ | Alta resistência',
+          applications: 'Calça Operacional Reforçada · Macacão Proteção Total · Jaleco Operacional',
+          colors: [
+            { name: 'Branco', hex: '#F5F5F5' }, { name: 'Verde Militar', hex: '#4A6A2A' },
+            { name: 'Azul Marinho', hex: '#0A1E50' }, { name: 'Preto', hex: '#141414' },
+            { name: 'Cru/Natural', hex: '#EDE0CA' }, { name: 'Verde Bandeira', hex: '#1A6B2A' },
+            { name: 'Cinza Claro', hex: '#C4C4BE' }, { name: 'Camuflado', hex: '#5B6E53', pattern: true },
+            { name: 'Bege', hex: '#D4CAAD' }, { name: 'Azul Royal', hex: '#1A4AA8' },
+            { name: 'Cinza Chumbo', hex: '#505050' }, { name: 'Caqui', hex: '#C8B87A' },
+            { name: 'Azul Motorista', hex: '#1A3278' }, { name: 'Marrom', hex: '#6B3A1A' }
+          ]
+        }
+      ]
+    },
+    essencial: {
+      id: 'essencial',
+      title: 'Linha Essencial',
+      description: 'O motor do seu alto turnover. Malhas projetadas para suportar lavagens frequentes sem perder a cor.',
+      categories: [
+        {
+          name: 'Malha PV Anti Pilling',
+          supplier: 'Guimatex | Cód. 167',
+          composition: '65% Poliéster / 35% Viscose',
+          specs: '165 g/m² | UV 20-25 | Anti Pilling',
+          applications: 'Camiseta Básica (Malha) · Linha Alimentar (PV) · Confecção Geral',
+          colors: [
+            { name: 'Branco', hex: '#FFFFFF' }, { name: 'Branco Gelo', hex: '#F0F4F8' },
+            { name: 'Cinza Mescla', hex: '#B0B0AB' }, { name: 'Cinza Claro', hex: '#C8C8C0' },
+            { name: 'Cinza Escuro', hex: '#606060' }, { name: 'Preto', hex: '#141414' },
+            { name: 'Azul Royal', hex: '#1A4AA8' }, { name: 'Azul Marinho', hex: '#0A1E50' },
+            { name: 'Azul Celeste', hex: '#5AA0D4' }, { name: 'Verde', hex: '#1A7A3A' },
+            { name: 'Verde Limão', hex: '#7AB428' }, { name: 'Amarelo', hex: '#D4C000' },
+            { name: 'Laranja', hex: '#D45C00' }, { name: 'Vermelho', hex: '#A81C1C' },
+            { name: 'Bordo', hex: '#8A0A1A' }, { name: 'Rosa Claro', hex: '#D4A0B4' },
+            { name: 'Caqui', hex: '#C8B87A' }, { name: 'Bege', hex: '#D4CAAD' }
+          ]
+        },
+        {
+          name: 'Malha Piquet PV',
+          supplier: 'Guimatex | Cód. 154',
+          composition: '73,35% Poliéster / 26,65% Viscose',
+          specs: '160 g/m² | UV 50+ | Ideal para polo',
+          applications: 'Polo Corporativa · Polo Piquet Básica · Camisetas Polo Linha Saúde',
+          colors: [
+            { name: 'Branco', hex: '#FFFFFF' }, { name: 'Branco Optical', hex: '#FEF0EA' },
+            { name: 'Cinza Mescla', hex: '#B0B0AB' }, { name: 'Cinza Claro', hex: '#C8C8C0' },
+            { name: 'Cinza Médio', hex: '#888880' }, { name: 'Preto', hex: '#141414' },
+            { name: 'Azul Royal', hex: '#1A4AA8' }, { name: 'Azul Marinho', hex: '#0A1E50' },
+            { name: 'Azul Piscina', hex: '#2A90C8' }, { name: 'Verde', hex: '#1A7A3A' },
+            { name: 'Verde Garrafa', hex: '#0A4A1E' }, { name: 'Amarelo', hex: '#D4C000' },
+            { name: 'Laranja', hex: '#D45C00' }, { name: 'Vermelho', hex: '#A81C1C' },
+            { name: 'Bordo', hex: '#8A0A1A' }, { name: 'Rosa', hex: '#C87890' },
+            { name: 'Caqui', hex: '#C8B87A' }, { name: 'Marrom', hex: '#6B3A1A' }
+          ]
+        }
+      ]
+    },
+    corporativa: {
+      id: 'corporativa',
+      title: 'Linha Corporativa',
+      description: 'Apresentação impecável para gestão e atendimento. Tecidos de alfaiataria com tecnologia antiamassos.',
+      categories: [
+        {
+          name: 'Tricoline MNPro',
+          supplier: 'MN Tecidos | Paris Span/Viena',
+          composition: '72% Alg 25% PA 3% EL',
+          specs: 'Secagem rápida | Easy Care',
+          applications: 'Camisa Executiva MC/ML · Calça Alfaiataria Corp. · Saia Lápis',
+          colors: [
+            { name: 'Branco', hex: '#FAFAFA' }, { name: 'Branco Off', hex: '#F0E0E4' },
+            { name: 'Bege', hex: '#D0CBA8' }, { name: 'Creme', hex: '#E8D6B4' },
+            { name: 'Amarelo Pálido', hex: '#E0D078' }, { name: 'Rosa Claro', hex: '#E0A0B8' },
+            { name: 'Rosa Velho', hex: '#C8889A' }, { name: 'Salmon', hex: '#D4907A' },
+            { name: 'Vermelho', hex: '#A81C1C' }, { name: 'Bordo', hex: '#6A0A1A' },
+            { name: 'Lilás', hex: '#B898C8' }, { name: 'Azul Celeste', hex: '#B8BADB' },
+            { name: 'Azul Claro', hex: '#5AA0D4' }, { name: 'Azul Royal', hex: '#1A4AA8' },
+            { name: 'Azul Marinho', hex: '#0A1E50' }, { name: 'Verde Água', hex: '#78C8A8' },
+            { name: 'Verde', hex: '#1A7A3A' }, { name: 'Verde Militar', hex: '#4A6A2A' },
+            { name: 'Cinza Claro', hex: '#C8C8C0' }, { name: 'Cinza Médio', hex: '#888880' },
+            { name: 'Cinza Escuro', hex: '#505050' }, { name: 'Preto', hex: '#141414' }
+          ]
+        }
+      ]
+    },
+    alimentar: {
+      id: 'alimentar',
+      title: 'Linha Alimentar',
+      description: 'Sanidade e giro rápido. Combinamos tecidos homologados para garantir higiene visual e zero transparência.',
+      categories: [
+        {
+          name: 'Cedro + Guimatex',
+          supplier: 'Restrições de Cor - BPF/ANVISA',
+          composition: 'Brim Leve e Malha PV',
+          specs: 'Consulte o laudo técnico antes de aprovar a cor do lote.',
+          applications: 'Uniformes Áreas Limpas · Laticínios e Frigoríficos',
+          isAlert: true,
+          colors: [
+            { name: 'Branco (Permitido)', hex: '#FFFFFF' },
+            { name: 'Azul (Permitido)', hex: '#1A4AA8' },
+            { name: 'Verde (Permitido)', hex: '#1A7A3A' },
+            { name: 'Cinza (Permitido)', hex: '#C8C8C0' }
+          ]
+        }
+      ]
+    },
+    saude: {
+      id: 'saude',
+      title: 'Linha Saúde',
+      description: 'Proteção e assepsia. Cores adequadas para ambientes clínicos e centros cirúrgicos, proporcionando conforto visual e suporte a lavagens rigorosas.',
+      categories: [
+        {
+          name: 'Brim Leve & Piquet PV',
+          supplier: 'Cedro Têxtil | Guimatex',
+          composition: '100% Algodão / Misto (PV)',
+          specs: 'Fácil higienização | Conforto Térmico',
+          applications: 'Jaleco Clínico · Túnica/Scrub · Polo de Atendimento',
+          colors: [
+            { name: 'Branco Clínico', hex: '#F3F8F4' },
+            { name: 'Verde Hospitalar', hex: '#7AAABA' },
+            { name: 'Azul Piscina', hex: '#2A90C8' },
+            { name: 'Rosa Suave', hex: '#C87890' }
+          ]
+        }
+      ]
+    }
+  };
+
+  // Referências DOM
+  const desktopTabs = document.getElementById('desktop-tabs');
+  const mobileTabs = document.getElementById('mobile-tabs');
+  const heroTitle = document.getElementById('hero-title');
+  const heroDesc = document.getElementById('hero-desc');
+  const catContainer = document.getElementById('categories-container');
+
+  // Inicialização
+  function init() {
+    buildTabs();
+    renderTab('operacional'); // Tab por defeito
+  }
+
+  // Construir botões das Tabs
+  function buildTabs() {
+    let desktopHtml = '';
+    let mobileHtml = '';
+
+    Object.values(catalogData).forEach(line => {
+      const label = line.title.replace('Linha ', '');
+      desktopHtml += `<button class="tab-btn" data-id="${line.id}" onclick="renderTab('${line.id}')">${label}</button>`;
+      mobileHtml += `<button class="mobile-tab-btn" data-id="${line.id}" onclick="renderTab('${line.id}')">${label}</button>`;
+    });
+
+    desktopTabs.innerHTML = desktopHtml;
+    mobileTabs.innerHTML = mobileHtml;
+  }
+
+  // Atualizar UI das Tabs
+  function updateActiveTabs(activeId) {
+    document.querySelectorAll('.tab-btn, .mobile-tab-btn').forEach(btn => {
+      if (btn.getAttribute('data-id') === activeId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  // Renderizar o conteúdo da linha ativa
+  function renderTab(tabId) {
+    const line = catalogData[tabId];
+    updateActiveTabs(tabId);
+
+    // Update Hero
+    heroTitle.textContent = line.title;
+    heroDesc.textContent = line.description;
+
+    // Remove classe para reativar animação
+    catContainer.classList.remove('fade-in');
+    // Force reflow
+    void catContainer.offsetWidth;
+    catContainer.classList.add('fade-in');
+
+    // Build Categories
+    let html = '';
+    line.categories.forEach(cat => {
+      
+      // Especificações
+      let specsHtml = '';
+      if (!cat.isAlert) {
+        specsHtml = `
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span class="spec-label">Referência</span>
+              <span class="spec-value">${cat.supplier}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Composição Estrutural</span>
+              <span class="spec-value">${cat.composition}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Performance / Gramagem</span>
+              <span class="spec-value">${cat.specs}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">${icons.scissors} Aplicações na Veste</span>
+              <span class="spec-value" style="font-size:12px; margin-top:2px;">${cat.applications}</span>
+            </div>
+          </div>
+        `;
+      } else {
+        specsHtml = `
+          <div class="specs-grid alert-theme">
+            <div class="spec-item">
+              <span class="spec-label">Referência</span>
+              <span class="spec-value">${cat.supplier}</span>
+            </div>
+            <div class="spec-alert-wrapper">
+              ${icons.shieldAlert}
+              <div class="spec-item">
+                <span class="spec-label red">Diretriz de Conformidade BPF</span>
+                <span class="spec-value muted">${cat.specs}</span>
+              </div>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">${icons.scissors} Aplicações na Veste</span>
+              <span class="spec-value" style="font-size:12px; margin-top:2px;">${cat.applications}</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // Grelha de Cores
+      let colorsHtml = cat.colors.map(color => `
+        <div class="swatch-card" onclick="copyHex('${color.hex || ''}', this.querySelector('.swatch-overlay'))">
+          <div class="swatch-color-box" style="background-color: ${color.hex}">
+            <div class="swatch-texture"></div>
+            <div class="swatch-shadow"></div>
+            ${color.pattern ? '<div class="swatch-pattern"></div>' : ''}
+            
+            <div class="swatch-overlay">
+              ${icons.copy}
+              <span class="overlay-text">Copiar HEX</span>
+            </div>
+          </div>
+          <div class="swatch-info">
+            <h4 class="swatch-name">${color.name}</h4>
+            <div class="swatch-hex-wrap">
+              HEX <span class="swatch-hex">${color.hex || 'N/A'}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      html += `
+        <section class="category-section">
+          <div class="cat-header">
+            <h3 class="cat-title font-display">${cat.name}</h3>
+          </div>
+          ${specsHtml}
+          <div class="swatches-grid">
+            ${colorsHtml}
+          </div>
+        </section>
+      `;
+    });
+
+    catContainer.innerHTML = html;
+  }
+
+  // Função para copiar HEX (Segura contra restrições de iFrame)
+  window.copyHex = function(hex, overlayEl) {
+    if (!hex) return;
+    
+    const textArea = document.createElement("textarea");
+    textArea.value = hex;
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+      
+      const originalHtml = overlayEl.innerHTML;
+      overlayEl.innerHTML = `${icons.check} <span class="overlay-text check">Copiado</span>`;
+      overlayEl.style.opacity = "1";
+      
+      setTimeout(() => {
+        overlayEl.innerHTML = originalHtml;
+        overlayEl.style.opacity = ""; 
+      }, 2000);
+      
+    } catch (err) {
+      console.error('Erro ao copiar HEX', err);
+    }
+    
+    document.body.removeChild(textArea);
+  };
+
+  // Run
+  init();
+
+</script>
+</body>
+</html>
